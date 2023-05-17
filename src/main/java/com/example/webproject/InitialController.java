@@ -5,6 +5,42 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class InitialController {
+
+    @GetMapping("/productos")
+    public String productos(){
+        return "/manager/productos";
+    }
+
+    @GetMapping("/productos/nuevo")
+    public String nuevoproducto(){
+        return "/manager/productosnuevo";
+    }
+
+    @GetMapping("/productos/editar")
+    public String editarproducto(){
+        return "/manager/productoseditar";
+    }
+
+    @GetMapping("/clientes")
+    public String clientes(){
+        return "/manager/clientes";
+    }
+
+    @GetMapping("/reportes")
+    public String reportes(){
+        return "/manager/reportes";
+    }
+
+    @GetMapping("/compras")
+    public String compras(){
+        return "/manager/compras";
+    }
+
+    @GetMapping("/managers")
+    public String managers(){
+        return "/admin/managers";
+    }
+
     @GetMapping("/about")
     public String acercade(){
         return "about";
