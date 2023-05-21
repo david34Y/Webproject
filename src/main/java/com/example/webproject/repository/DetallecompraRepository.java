@@ -17,4 +17,11 @@ public interface DetallecompraRepository extends JpaRepository<Detallecompra, In
             nativeQuery = true)
     List<Detallecompra> findByComprasID(Integer id);
 
+    @Query(value = "SELECT iddetallecompra, cantidad,preciocompra,PlantasID,CompraID\n" +
+            "FROM detallecompra dc\n" +
+            "JOIN compra c ON dc.CompraID = c.idcompra\n" +
+            "WHERE c.estado = 'Completa';",nativeQuery = true)
+    List<Detallecompra> findByCompraCompletada();
+
+
 }

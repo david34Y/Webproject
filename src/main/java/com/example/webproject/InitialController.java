@@ -11,16 +11,6 @@ public class InitialController {
         return "/manager/productos";
     }
 
-    @GetMapping("/productos/nuevo")
-    public String nuevoproducto(){
-        return "/manager/productosnuevo";
-    }
-
-    @GetMapping("/productos/editar")
-    public String editarproducto(){
-        return "/manager/productoseditar";
-    }
-
     @GetMapping("/clientes")
     public String clientes(){
         return "/manager/clientes";
@@ -28,12 +18,12 @@ public class InitialController {
 
     @GetMapping("/reportes")
     public String reportes(){
-        return "/manager/reportes";
+        return "compras";
     }
 
     @GetMapping("/compras")
     public String compras(){
-        return "/manager/compras";
+        return "reportes1";
     }
 
     @GetMapping("/managers")

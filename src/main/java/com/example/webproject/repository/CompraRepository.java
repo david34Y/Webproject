@@ -14,4 +14,7 @@ public interface CompraRepository extends JpaRepository<Compra, Integer> {
     @Modifying
     @Query(value = "UPDATE Compra c SET c.estado = 'Completa' WHERE c.idcompra = ?1",nativeQuery = true)
     void actualizarEstado(int id);
+
+    @Query(value = "SELECT sum(monto) FROM compra WHERE estado = 'Completa'", nativeQuery = true)
+    Float obtenerMontoTotal();
 }

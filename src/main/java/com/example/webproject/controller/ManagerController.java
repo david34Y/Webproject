@@ -6,6 +6,7 @@ import com.example.webproject.entity.Plantas;
 import com.example.webproject.repository.CompraRepository;
 import com.example.webproject.repository.DetallecompraRepository;
 import com.example.webproject.repository.PlantasRepository;
+import com.example.webproject.repository.UsuarioRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -22,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,14 +158,14 @@ public class ManagerController {
     @Autowired
     CompraRepository compraRepository;
 
-    @GetMapping(value = "/reports")
-    public String listarReportes(Model model){
+    @GetMapping(value = "/achats")
+    public String listarCompras(Model model){
         model.addAttribute("reportList", detallecompraRepository.findAll());
-        return  "manager/reportes";
+        return "manager/compras";
     }
 
     @GetMapping(value = "/details")
-    public String detallesReportes(@ModelAttribute("detallecompra") Detallecompra detallecompra,
+    public String detallesCompras(@ModelAttribute("detallecompra") Detallecompra detallecompra,
                                    @RequestParam("id") int id,
                                    Model model){
 
@@ -191,7 +191,22 @@ public class ManagerController {
 
             }
         }
-        return "redirect:/manager/reports";
+        return "redirect:/manager/achats";
+    }
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    @GetMapping(value = "/clients")
+    public String listarClientes(Model model){
+        model.addAttribute("clientList", usuarioRepository.findAllClients());
+        return  "manager/clientes";
+    }
+
+    @GetMapping(value = "/reports")
+    public String listarReportes(Model model){
+        model.addAttribute("reportList",detallecompraRepository.findByCompraCompletada());
+        model.addAttribute("montoTotal",compraRepository.obtenerMontoTotal());
+        return "manager/reportes";
     }
 
 }

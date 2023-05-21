@@ -13,7 +13,7 @@
       <!-- Page Header-->
       <header class="bg-white shadow-sm px-4 py-3 z-index-20">
         <div class="container-fluid px-0">
-          <h2 class="mb-0 p-1">Reportes</h2>
+          <h2 class="mb-0 p-1">Detalle de compra</h2>
         </div>
       </header>
 
@@ -55,8 +55,12 @@
           </div>
         </div>
       </section>
+      <div class="container-fluid centered">
+        <div class="col-lg-12" >
+          <a class="btn btn-secondary" th:href="@{'/manager/achats'}">Retroceder</a>
+        </div>
+      </div>
 
-      <a class="btn btn-danger" th:href="@{'/manager/reports'}">Retroceder</a>
       <!-- Page Footer-->
       <footer th:replace="fragments/fragment_manager :: footer"></footer>
     </div>
