@@ -16,6 +16,13 @@
               <h2 class="mb-0 p-1">Reportes</h2>
             </div>
           </header>
+          <section class="alert">
+            <div class="container-fluid">
+              <div class="col-lg-12">
+                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-primary" role="alert"></div>
+              </div>
+            </div>
+          </section>
           <section class="tables">   
             <div class="container-fluid">
               <div class="row gy-4">
@@ -28,37 +35,25 @@
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>COMPRA</th>
-                              <th>FECHA Y HORA</th>
+                              <th>FECHA</th>
                               <th>CLIENTE</th>
                               <th>ITEMS</th>
                               <th>TOTAL</th>
+                              <th>ESTADO</th>
+                              <th></th>
+                              <th></th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                              <td>@mdo</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th class="border-bottom-0" scope="row">3</th>
-                              <td class="border-bottom-0">Larry</td>
-                              <td class="border-bottom-0">the Bird</td>
-                              <td class="border-bottom-0">@twitter</td>
-                              <td class="border-bottom-0">@mdo</td>
-                              <td class="border-bottom-0">@mdo</td>
+                          <tbody >
+                            <tr th:each="report, info :${reportList}">
+                              <th scope="row" th:text="${info.index + 1}">1</th>
+                              <td>17/02/2001</td>
+                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellido}">Otto</td>
+                              <td th:text="${report.compra.numplantas}">@mdo</td>
+                              <td th:text="${report.compra.monto}">@mdo</td>
+                              <td th:text="${report.compra.estado}"></td>
+                              <td><a th:href="@{'/manager/details?id='+ ${report.compra.getIdcompra()}}" class="btn btn-light">Ver detalles</a></td>
+                              <td><a th:if="${report.compra.estado=='Pendiente'}" th:href="@{'/manager/state?id='+ ${report.compra.idcompra}}" class="btn btn-info">Cambiar</a></td>
                             </tr>
                           </tbody>
                         </table>

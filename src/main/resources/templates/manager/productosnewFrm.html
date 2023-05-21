@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment_manager :: head(titulo='Alazea - Gardening &amp; Landscaping')">
+</head>
+<body>
+<div class="page">
+  <!-- Main Navbar-->
+  <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
+  <div class="page-content d-flex align-items-stretch">
+    <!-- Side Navbar -->
+    <nav th:replace="fragments/fragment_manager :: sideBar"></nav>
+    <div class="content-inner w-100">
+      <!-- Page Header-->
+      <header class="bg-white shadow-sm px-4 py-3 z-index-20">
+        <div class="container-fluid px-0">
+          <h2 class="mb-0 p-1">Formulario</h2>
+        </div>
+      </header>
+      <!-- Forms Section-->
+      <section class="forms">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="h4 mb-0" th:text="${plantas.idplantas == 0 ? 'Nuevo producto': 'Editar producto'}" >Nuevo producto</h3>
+                </div>
+                <div class="card-body">
+                  <form method="post" th:action="@{'/manager/save'}" th:object="${plantas}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label class="form-label" for="archivo">Foto de perfil:</label>
+                      <input class="form-control" type="file" id="archivo" name="archivo" required>
+                      <div class="invalid-feedback" th:if="${msg!=null}"
+                           th:text="${msg}"></div>
+                    </div>
+                    <input type="hidden" th:field="*{idplantas}">
+                    <div class="mb-3">
+                      <label class="form-label">Nombre de la planta:</label>
+                      <input class="form-control" type="text" th:field="*{nombre}" th:readonly="${plantas.idplantas != 0}" th:required="${plantas.idplantas == 0}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Stock:</label>
+                      <input class="form-control" type="number" th:field="*{stock}" th:required="${plantas.idplantas == 0}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Precio:</label>
+                      <input class="form-control" type="number" th:field="*{precio}"  step="0.01" th:readonly="${plantas.idplantas != 0}" th:required="${plantas.idplantas == 0}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Ambiente recomendado:</label>
+                      <textarea class="form-control" th:field="*{recomendacion}" rows="4" cols="30" th:readonly="${plantas.idplantas != 0}" th:required="${plantas.idplantas == 0}"></textarea>
+                    </div>
+                    <div class="card-body text-center">
+                      <a class="btn btn-danger" th:href="@{'/manager/list'}">Cancelar</a>
+                      <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page Footer-->
+      <footer th:replace="fragments/fragment_manager :: footer"></footer>
+    </div>
+  </div>
+</div>
+<!-- JavaScript files-->
+<div th:replace="fragments/fragment_manager :: jsfiles"></div>
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</body>
+</html>
