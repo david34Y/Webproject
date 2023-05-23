@@ -8,7 +8,7 @@
   <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
   <div class="page-content d-flex align-items-stretch">
     <!-- Side Navbar -->
-    <nav th:replace="fragments/fragment_manager :: sideBar"></nav>
+    <nav th:replace="fragments/fragment_manager :: sideBar(active='Compras')"></nav>
     <div class="content-inner w-100">
       <!-- Page Header-->
       <header class="bg-white shadow-sm px-4 py-3 z-index-20">
@@ -43,7 +43,7 @@
                         <td><img th:src="@{|image/${detalle.plantas.idplantas}|}"
                                  width="120" height="100"></td>
                         <td th:text="${detalle.cantidad}">@mdo</td>
-                        <td th:text="${detalle.preciocompra}"></td>
+                        <td th:text="${'S/. ' +detalle.preciocompra}"></td>
 
                       </tr>
                       </tbody>

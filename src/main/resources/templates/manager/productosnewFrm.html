@@ -8,7 +8,7 @@
   <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
   <div class="page-content d-flex align-items-stretch">
     <!-- Side Navbar -->
-    <nav th:replace="fragments/fragment_manager :: sideBar"></nav>
+    <nav th:replace="fragments/fragment_manager :: sideBar(active='Productos')"></nav>
     <div class="content-inner w-100">
       <!-- Page Header-->
       <header class="bg-white shadow-sm px-4 py-3 z-index-20">
@@ -30,9 +30,15 @@
                   <form method="post" th:action="@{'/manager/save'}" th:object="${plantas}" enctype="multipart/form-data">
                     <div class="mb-3">
                       <label class="form-label" for="archivo">Foto de perfil:</label>
-                      <input class="form-control" type="file" id="archivo" name="archivo" required>
+                      <input class="form-control" type="file" id="archivo" name="archivo" onchange="previewImage()" required>
                       <div class="invalid-feedback" th:if="${msg!=null}"
                            th:text="${msg}"></div>
+                    </div>
+                    <div class="mb-3" >
+                      <label class="form-label" for="preview">Vista previa:</label>
+                      <div class="form-control">
+                        <img id="preview" th:src="@{|image/*{idplantas}|}" alt="Vista previa" class="img-fluid" th:required="${plantas.idplantas == 0}">
+                      </div>
                     </div>
                     <input type="hidden" th:field="*{idplantas}">
                     <div class="mb-3">
@@ -69,6 +75,21 @@
 </div>
 <!-- JavaScript files-->
 <div th:replace="fragments/fragment_manager :: jsfiles"></div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+  function previewImage() {
+    var input = document.getElementById('archivo');
+    var previewImage = document.getElementById('preview');
+
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      previewImage.src = event.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
 <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>

@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PlantasRepository extends JpaRepository<Plantas, Integer> {
+    List<Plantas> findByNombre(String nombre);
 }

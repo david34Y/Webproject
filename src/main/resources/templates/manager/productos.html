@@ -8,12 +8,12 @@
       <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
       <div class="page-content d-flex align-items-stretch"> 
         <!-- Side Navbar -->
-        <nav th:replace="fragments/fragment_manager :: sideBar"></nav>
+        <nav th:replace="fragments/fragment_manager :: sideBar(active='Productos')"></nav>
         <div class="content-inner w-100">
           <!-- Page Header-->
           <header class="bg-white shadow-sm px-4 py-3 z-index-20">
             <div class="container-fluid px-0">
-              <h2 class="mb-0 p-1">Plantas</h2>
+              <h2 class="mb-0 p-1">Productos</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -21,14 +21,19 @@
             <div class="container-fluid">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 bg-white">
-
-
-                  <input id="searchInput" class="form-control mb-3" type="text" placeholder="Search"
-                         aria-label="Search">
+                  <li class="breadcrumb-item">
+                    <form method="post" th:action="@{'/manager/searchProduct'}" >
+                      <div class="input-group">
+                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
+                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
+                      </div>
+                    </form>
+                  </li>
                 </ol>
               </nav>
             </div>
           </div>
+
           <section class="alert">
             <div class="container-fluid">
               <div class="col-lg-12">
@@ -68,7 +73,7 @@
                                        width="120" height="100"></td>
                               <td th:text="${product.recomendacion}">Otto</td>
                               <td th:text="${product.stock}">Otto</td>
-                              <td th:text="${product.precio}">@mdo</td>
+                              <td th:text="${'S/. ' + product.precio}">@mdo</td>
                               <td>
                                 <a class="btn btn-warning"
                                    th:href="@{'/manager/edit?id=' + ${product.idplantas}}">Editar</a>
@@ -136,11 +141,11 @@
               </div>
             </div>
           </section>
-          <section class="review-details">
+          <!--section class="review-details">
             <div class="col-md-4">
               <div id="results"></div>
             </div>
-          </section>
+          </section-->
 
           <div class="container">
             <div class="fixed-bottom text-right mr-3 mb-3">
@@ -159,61 +164,5 @@
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <script th:inline="javascript">
-      var listaJava = /*[[${productListJSON}]]*/ '';
-      console.log(listaJava);
-      var lista = JSON.parse(listaJava);
-      console.log(lista);
-
-      var searchInput = document.getElementById("searchInput");
-      var resultsDiv = document.getElementById("results");
-
-      searchInput.addEventListener("keyup", function() {
-        // Obtener el término de búsqueda
-        var searchTerm = searchInput.value.toLowerCase();
-        // Verificar si el término de búsqueda es vacío
-        if (searchTerm === "") {
-          resultsDiv.innerHTML = "";
-          return;
-        }else{
-          // Filtrar los productos que coinciden con el término de búsqueda
-          var filteredProducts = lista.filter(function(product) {
-            return product.nombre.toLowerCase().includes(searchTerm);
-          });}
-        console.log(filteredProducts)
-
-        // Tomar el primer producto del arreglo filtrado (si existe)
-        var firstProduct = filteredProducts[0];
-
-        // Mostrar el primer producto (si existe)
-        if (firstProduct) {
-          var productDiv = document.createElement("div");
-          productDiv.classList.add("product");
-
-          var title = document.createElement("h2");
-          title.innerText = firstProduct.nombre;
-
-          var price = document.createElement("p");
-          price.innerHTML = "Precio: <strong>" + firstProduct.precio + "</strong>";
-
-          var stock = document.createElement("p");
-          stock.innerHTML = "Stock: <strong>" + firstProduct.stock + "</strong>";
-
-          var recommendation = document.createElement("p");
-          recommendation.innerHTML = "Recomendación: <strong>" + firstProduct.recomendacion + "</strong>";
-
-          productDiv.appendChild(title);
-          productDiv.appendChild(price);
-          productDiv.appendChild(stock);
-          productDiv.appendChild(recommendation);
-
-          resultsDiv.innerHTML = "";
-          resultsDiv.appendChild(productDiv);
-        } else {
-          resultsDiv.innerHTML = "No se encontraron resultados";
-        }
-      });
-
-    </script>
   </body>
 </html>

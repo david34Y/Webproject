@@ -209,4 +209,29 @@ public class ManagerController {
         return "manager/reportes";
     }
 
+    @PostMapping("/searchProduct")
+    public String buscarProductos(@RequestParam("searchField") String searchField,
+                                  Model model){
+        if (searchField.equals("")){
+            model.addAttribute("productList",plantasRepository.findAll());
+        }else{
+            model.addAttribute("productList",plantasRepository.findByNombre(searchField));
+        }
+
+        return "manager/productos";
+    }
+
+    @PostMapping("/searchClient")
+    public String buscarClientes(@RequestParam("searchField") String searchField,
+                                  Model model){
+        if (searchField.equals("")){
+            model.addAttribute("clientList",usuarioRepository.findAllClients());
+        }else{
+            model.addAttribute("clientList",usuarioRepository.findSpecificClient(searchField));
+        }
+
+        return "manager/clientes";
+    }
+
+
 }

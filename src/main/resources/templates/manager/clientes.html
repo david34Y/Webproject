@@ -8,7 +8,7 @@
       <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
       <div class="page-content d-flex align-items-stretch"> 
         <!-- Side Navbar -->
-        <nav th:replace="fragments/fragment_manager :: sideBar"></nav>
+        <nav th:replace="fragments/fragment_manager :: sideBar(active='Clientes')"></nav>
         <div class="content-inner w-100">
           <!-- Page Header-->
           <header class="bg-white shadow-sm px-4 py-3 z-index-20">
@@ -16,6 +16,23 @@
               <h2 class="mb-0 p-1">Clientes</h2>
             </div>
           </header>
+          <!-- Breadcrumb-->
+          <div class="bg-white">
+            <div class="container-fluid">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 bg-white">
+                  <li class="breadcrumb-item">
+                    <form method="post" th:action="@{'/manager/searchClient'}" >
+                      <div class="input-group">
+                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
+                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
+                      </div>
+                    </form>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
           <section class="tables">   
             <div class="container-fluid">
               <div class="row gy-4">

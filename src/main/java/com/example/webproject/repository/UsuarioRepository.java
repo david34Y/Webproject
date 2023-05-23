@@ -17,4 +17,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
             nativeQuery = true)
     List<Usuario> findAllManagers();
 
+
+    @Query(value = "SELECT * FROM usuario WHERE RolID = 2 AND (nombre = ?1 or apellido = ?1)",
+            nativeQuery = true)
+    List<Usuario> findSpecificClient(String nombre);
+
 }
