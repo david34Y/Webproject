@@ -1,7 +1,5 @@
-package com.example.plantas1.entity;
+package com.example.webproject.entity;
 import jakarta.persistence.*;
-
-import java.util.concurrent.CompletionStage;
 
 @Entity
 @Table(name="detallecompra")

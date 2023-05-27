@@ -1,7 +1,10 @@
-package com.example.webproject;
+package com.example.webproject.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import static com.example.webproject.controller.PlantasController.contador;
 
 @Controller
 public class InitialController {
@@ -10,10 +13,12 @@ public class InitialController {
         return "about";
     }
 
-    @GetMapping("/blog")
-    public String blog(){
-        return "blog";
+    @GetMapping("/home")
+    public String home(Model model){
+        model.addAttribute("contador",contador);
+        return "home";
     }
+
 
     @GetMapping("/cart")
     public String carrito(){
@@ -25,13 +30,10 @@ public class InitialController {
         return "checkout";
     }
 
-    @GetMapping("/contact")
-    public String contacto(){
-        return "contact";
-    }
-
     @GetMapping("/index")
-    public String indice(){
+    public String indice(Model model){
+
+        model.addAttribute("contador",contador);
         return "index";
     }
 
@@ -39,31 +41,23 @@ public class InitialController {
     public String portafolio(){
         return "portfolio";
     }
-
-    @GetMapping("/shop")
-    public String tienda(){
-        return "shop";
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("contador",contador);
+        return "login";
     }
 
-    @GetMapping("/shop-details")
-    public String detallestienda(){
-        return "shop-details";
-    }
+
 
     @GetMapping("/single-portfolio")
-    public String portafoliosolo(){
+    public String portafoliosolo(Model model){
+        model.addAttribute("contador",contador);
         return "single-portfolio";
     }
 
-    @GetMapping("/single-post")
-    public String postunico(){
-        return "single-post";
-    }
 
-    @GetMapping("/registro")
-    public String registro(){
-        return "register";
-    }
+
+
 
 
 }

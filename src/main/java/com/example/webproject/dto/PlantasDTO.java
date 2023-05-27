@@ -1,4 +1,4 @@
-package com.example.plantas1.dto;
+package com.example.webproject.dto;
 
 public interface PlantasDTO {
 }

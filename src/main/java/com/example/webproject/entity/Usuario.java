@@ -1,40 +1,70 @@
-package com.example.plantas1.entity;
+package com.example.webproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idusuario;
 
+    @Column(nullable = false)
+    @NotBlank(message = "Complete sus datos")
+    @NotNull
+    @Pattern(regexp = "[/^[A-Za-záéíñóúüÁÉÍÑÓÚÜ_.\\s]+$/g]{2,254}",message = "Solo puede ingresar letras")
     private String nombre;
 
-    private String apellido;
+    @Column(nullable = false)
+    @NotBlank(message = "Complete sus datos")
+    @Pattern(regexp = "[/^[A-Za-záéíñóúüÁÉÍÑÓÚÜ_.\\s]+$/g]{2,254}",message = "Solo puede ingresar letras")
+    private String apellidos;
 
+
+    @Column(nullable = false)
+    @NotBlank(message = "Complete sus datos")
+    @Pattern(regexp = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",message = "Debe tener el formato nombre@correo.com")
     private String correo;
 
-    private String celular;
+    @Column(nullable = false)
+    @NotBlank(message = "Complete su contraseña")
+    @Size(min = 8, message = "Mínimo 8 caracteres")
+    private String password;
+
 
     @ManyToOne
-    @JoinColumn(name = "rol_idrol")
+    @JoinColumn(name = "rol_id")
     private Rol rol;
 
     // Constructor vacío
-    public Usuario() {}
+    public Usuario() {
+    }
 
     // Constructor con todos los campos
     public Usuario(String nombre, String apellido, String correo, String celular, Rol rol) {
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellidos = apellido;
         this.correo = correo;
-        this.celular = celular;
         this.rol = rol;
     }
 
     // Getters y Setters
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getIdusuario() {
         return idusuario;
     }
@@ -51,12 +81,12 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellido) {
+        this.apellidos = apellido;
     }
 
     public String getCorreo() {
@@ -67,13 +97,6 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
 
     public Rol getRol() {
         return rol;
@@ -84,9 +107,4 @@ public class Usuario {
     }
 
     // Método toString para imprimir el objeto
-    @Override
-    public String toString() {
-        return "Usuario [idUsuario=" + idusuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", celular=" + celular + ", rol=" + rol + "]";
-    }
-
 }

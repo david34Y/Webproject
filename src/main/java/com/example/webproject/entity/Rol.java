@@ -1,45 +1,47 @@
-package com.example.plantas1.entity;
+package com.example.webproject.entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 
 @Entity
 @Table(name = "rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idRol;
+    private Integer idrol;
 
-    private String nombreRol;
+
+    private String nombrerol;
 
     // Constructor vacío
     public Rol() {}
 
     // Constructor con todos los campos
     public Rol(String nombreRol) {
-        this.nombreRol = nombreRol;
+        this.nombrerol = nombreRol;
     }
 
     // Getters y Setters
-    public Integer getIdRol() {
-        return idRol;
+    public Integer getIdrol() {
+        return idrol;
     }
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
+    public void setIdrol(Integer idRol) {
+        this.idrol = idRol;
     }
 
-    public String getNombreRol() {
-        return nombreRol;
+    public String getNombrerol() {
+        return nombrerol;
     }
 
-    public void setNombreRol(String nombreRol) {
-        this.nombreRol = nombreRol;
+    public void setNombrerol(String nombreRol) {
+        this.nombrerol = nombreRol;
     }
 
     // Método toString para imprimir el objeto
     @Override
     public String toString() {
-        return "Rol [idRol=" + idRol + ", nombreRol=" + nombreRol + "]";
+        return "Rol [idRol=" + idrol + ", nombreRol=" + nombrerol + "]";
     }
 
 }
