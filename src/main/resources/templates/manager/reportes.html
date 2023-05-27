@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/fragment_manager :: head(titulo='Alazea - Gardening &amp; Landscaping')">
+  </head>
+  <body>
+    <div class="page">
+      <!-- Main Navbar-->
+      <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
+      <div class="page-content d-flex align-items-stretch"> 
+        <!-- Side Navbar -->
+        <nav th:replace="fragments/fragment_manager :: sideBar(active='Reportes')"></nav>
+        <div class="content-inner w-100">
+          <!-- Page Header-->
+          <header class="bg-white shadow-sm px-4 py-3 z-index-20">
+            <div class="container-fluid px-0">
+              <h2 class="mb-0 p-1">Reportes</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="bg-white">
+            <div class="container-fluid">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 bg-white">
+                  <li class="breadcrumb-item">
+                    <form method="post" action="#" >
+                      <div class="input-group">
+                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
+                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
+                      </div>
+                    </form>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row gy-4">
+                <div class="col-lg-12">
+                  <div class="card mb-0">
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table mb-0 table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>COMPRA</th>
+                              <th>CLIENTE</th>
+                              <th></th>
+                              <th>TOTAL</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr th:each="report, info :${reportList}">
+                              <th scope="row" th:text="${info.index + 1}">1</th>
+                              <td th:text="${report.compra.idcompra}">Mark</td>
+                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellido}">Otto</td>
+                              <td><button class="btn btn-light">Ver detalles</button></td>
+                              <td th:text="${'S/. ' +report.compra.monto}"></td>
+                            </tr>
+
+                          </tbody>
+                          <tr>
+                            <th scope="row"></th>
+                            <td ></td>
+                            <td ></td>
+                            <td></td>
+                            <td th:text="${'S/. ' + montoTotal}"></td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Page Footer-->
+          <footer th:replace="fragments/fragment_manager :: footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <div th:replace="fragments/fragment_manager :: jsfiles"></div>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </body>
+</html>

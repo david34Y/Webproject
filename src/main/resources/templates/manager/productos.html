@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/fragment_manager :: head(titulo='Alazea - Gardening &amp; Landscaping')">
+  </head>
+  <body>
+    <div class="page">
+      <!-- Main Navbar-->
+      <header th:replace="fragments/fragment_manager :: mainNavBar"></header>
+      <div class="page-content d-flex align-items-stretch"> 
+        <!-- Side Navbar -->
+        <nav th:replace="fragments/fragment_manager :: sideBar(active='Productos')"></nav>
+        <div class="content-inner w-100">
+          <!-- Page Header-->
+          <header class="bg-white shadow-sm px-4 py-3 z-index-20">
+            <div class="container-fluid px-0">
+              <h2 class="mb-0 p-1">Productos</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="bg-white">
+            <div class="container-fluid">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 bg-white">
+                  <li class="breadcrumb-item">
+                    <form method="post" th:action="@{'/manager/searchProduct'}" >
+                      <div class="input-group">
+                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
+                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
+                      </div>
+                    </form>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+
+          <section class="alert">
+            <div class="container-fluid">
+              <div class="col-lg-12">
+                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-primary" role="alert"></div>
+                <div th:if="${msg1 != null}" th:text="${msg1}" class="alert alert-warning" role="alert"></div>
+                <div th:if="${msg2 != null}" th:text="${msg2}" class="alert alert-danger" role="alert"></div>
+              </div>
+            </div>
+          </section>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row gy-4">
+                <div class="col-lg-12">
+                  <div class="card mb-0">
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table mb-0 table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>NOMBRE</th>
+                              <th></th>
+                              <th>RECOMENDACIONES</th>
+                              <th>STOCK</th>
+                              <th>PRECIO</th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr th:each="product, info :${productList}">
+                              <th scope="row" th:text="${info.index + 1}">1</th>
+                              <td th:text="${product.nombre}">Otto</td>
+                              <td><img th:src="@{|image/${product.idplantas}|}"
+                                       width="120" height="100"></td>
+                              <td th:text="${product.recomendacion}">Otto</td>
+                              <td th:text="${product.stock}">Otto</td>
+                              <td th:text="${'S/. ' + product.precio}">@mdo</td>
+                              <td>
+                                <a class="btn btn-warning"
+                                   th:href="@{'/manager/edit?id=' + ${product.idplantas}}">Editar</a>
+                              </td>
+                              <td>
+                                <button class="btn btn-danger" data-toggle="modal" th:data-target="'#exampleModalDelete' + ${info.index}"
+                                >Borrar</button>
+                                <!-- Modal -->
+                                <div class="modal fade" th:id="'exampleModalDelete' + ${info.index}" tabindex="-1" role="dialog" th:aria-labelledby="'exampleModalDelete'+ ${info.index}+'Label'" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" th:id="'exampleModalDelete'+ ${info.index}+'Label'">Advertencia</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        ¿Está seguro de querer eliminar este producto?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <a type="button" class="btn btn-danger"
+                                           th:href="@{|/manager/delete?id=${product.idplantas}|}">Borrar</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-success" data-toggle="modal" th:data-target="'#exampleModal' + ${info.index}">
+                                  Ver +
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade bd-example-modal-lg" th:id="'exampleModal' + ${info.index}" tabindex="-1" role="dialog"
+                                     th:aria-labelledby="'exampleModal' + ${info.index} + 'Label'" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" th:id="'exampleModal' + ${info.index} + 'Label'" th:text="${product.nombre}">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <!--img th:src="@{|imagen/${product.idplantas}|}"
+                                                 width="200" height="180"-->
+                                        <p th:text="${product.precio}"></p>
+                                        <p th:text="${product.stock}"></p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--section class="review-details">
+            <div class="col-md-4">
+              <div id="results"></div>
+            </div>
+          </section-->
+
+          <div class="container">
+            <div class="fixed-bottom text-right mr-3 mb-3">
+              <a th:href="@{'/manager/new'}" class="btn btn-violet rounded-circle btn-lg">
+                <i class="fas fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Page Footer-->
+          <footer th:replace="fragments/fragment_manager :: footer"></footer>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <div th:replace="fragments/fragment_manager :: jsfiles"></div>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  </body>
+</html>

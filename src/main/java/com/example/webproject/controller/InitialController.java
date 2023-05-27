@@ -8,6 +8,32 @@ import static com.example.webproject.controller.PlantasController.contador;
 
 @Controller
 public class InitialController {
+
+    @GetMapping("/productos")
+    public String productos(){
+        return "/manager/productos";
+    }
+
+    @GetMapping("/clientes")
+    public String clientes(){
+        return "/manager/clientes";
+    }
+
+    @GetMapping("/reportes")
+    public String reportes(){
+        return "compras";
+    }
+
+    @GetMapping("/compras")
+    public String compras(){
+        return "reportes1";
+    }
+
+    @GetMapping("/managers")
+    public String managers(){
+        return "/admin/managers";
+    }
+
     @GetMapping("/about")
     public String acercade(){
         return "about";
