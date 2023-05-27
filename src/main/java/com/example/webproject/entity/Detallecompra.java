@@ -31,7 +31,6 @@ public class Detallecompra {
     public void setIddetallecompra(int iddetallecompra) {
         this.iddetallecompra = iddetallecompra;
     }
-
     public int getCantidad() {
         return cantidad;
     }
