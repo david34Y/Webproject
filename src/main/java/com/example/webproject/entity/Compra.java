@@ -2,52 +2,32 @@ package com.example.webproject.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
-import java.util.Objects;
-
 @Entity
+@Table(name = "compra")
 public class Compra {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @Column(name = "idcompra")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idcompra;
-    @Basic
-    @Column(name = "numplantas")
-    private int numplantas;
-    @Basic
-    @Column(name = "monto")
-    private Double monto;
-    @Basic
-    @Column(name = "estado")
+
     private String estado;
-    @ManyToOne
-    @JoinColumn(name = "UsuarioID")
-    private Usuario usuario;
 
+    private int numplantas;
+    private double monto;
 
-    public int getIdcompra() {
-        return idcompra;
-    }
-
-    public void setIdcompra(int idcompra) {
-        this.idcompra = idcompra;
-    }
-
-    public int getNumplantas() {
-        return numplantas;
-    }
-
-    public void setNumplantas(int numplantas) {
-        this.numplantas = numplantas;
-    }
-
-    public Double getMonto() {
+    public double getMonto() {
         return monto;
     }
 
-    public void setMonto(Double monto) {
+    public void setMonto(double monto) {
         this.monto = monto;
     }
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Plantas plantas;
 
     public String getEstado() {
         return estado;
@@ -57,6 +37,37 @@ public class Compra {
         this.estado = estado;
     }
 
+    // Constructor vacío
+    public Compra() {}
+
+
+
+    // Constructor con todos los campos
+    public Compra(String estado, int numPlantas, Usuario usuario, Plantas plantas) {
+        this.estado = estado;
+        this.numplantas = numPlantas;
+        this.usuario = usuario;
+        this.plantas = plantas;
+    }
+
+    // Getters y Setters
+    public int getIdcompra() {
+        return idcompra;
+    }
+
+    public void setIdcompra(int idcompra) {
+        this.idcompra = idcompra;
+    }
+
+
+
+    public int getNumplantas() {
+        return numplantas;
+    }
+
+    public void setNumplantas(int numplantas) {
+        this.numplantas = numplantas;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -65,4 +76,19 @@ public class Compra {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Plantas getPlantas() {
+        return plantas;
+    }
+
+    public void setPlantas(Plantas plantas) {
+        this.plantas = plantas;
+    }
+
+    // Método toString para imprimir el objeto
+    @Override
+    public String toString() {
+        return "Compra [idCarrito=" + idcompra + ", estado=" + estado + ", numPlantas=" + numplantas + ", usuario=" + usuario + ", plantas=" + plantas + "]";
+    }
+
 }

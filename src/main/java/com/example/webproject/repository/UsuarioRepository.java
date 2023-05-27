@@ -9,16 +9,16 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    @Query(value = "SELECT * FROM usuario WHERE RolID = 2",
+    @Query(value = "SELECT * FROM usuario WHERE rol_id = 2",
             nativeQuery = true)
     List<Usuario> findAllClients();
 
-    @Query(value = "SELECT * FROM usuario WHERE RolID = 1",
+    @Query(value = "SELECT * FROM usuario WHERE rol_id = 1",
             nativeQuery = true)
     List<Usuario> findAllManagers();
 
 
-    @Query(value = "SELECT * FROM usuario WHERE RolID = 2 AND (nombre = ?1 or apellido = ?1)",
+    @Query(value = "SELECT * FROM usuario WHERE rol_id = 2 AND (nombre = ?1 or apellidos = ?1)",
             nativeQuery = true)
     List<Usuario> findSpecificClient(String nombre);
 

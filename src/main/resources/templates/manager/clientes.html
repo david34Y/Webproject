@@ -48,7 +48,6 @@
                               <th>CLIENTE</th>
                               <th></th>
                               <th>CORREO</th>
-                              <th>TELEFONO</th>
                               <th>ULT. MSJ</th>
                               <th>RESPONDER</th>
                             </tr>
@@ -56,10 +55,9 @@
                           <tbody>
                             <tr th:each="client, info :${clientList}">
                               <th scope="row" th:text="${info.index + 1}">1</th>
-                              <td th:text="${client.nombre + ' ' + client.apellido}">Mark</td>
+                              <td th:text="${client.nombre + ' ' + client.apellidos}">Mark</td>
                               <td>FOTO</td>
                               <td th:text="${client.correo}">Gaaaaaa</td>
-                              <td th:text="${client.numero}">Otto</td>
                               <td>17/02/2001</td>
                               <td> <button class="chat-button" data-toggle="tooltip" data-placement="top" title="Iniciar chat">
                                 <i class="fas fa-comment"></i>

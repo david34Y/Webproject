@@ -18,10 +18,10 @@ public class Detallecompra {
     @Column(name = "preciocompra")
     private Double preciocompra;
     @ManyToOne
-    @JoinColumn(name = "PlantasID")
+    @JoinColumn(name = "plantas_idplantas")
     private Plantas plantas;
     @ManyToOne
-    @JoinColumn(name = "CompraID")
+    @JoinColumn(name = "compra_idcompra")
     private Compra compra;
 
     public int getIddetallecompra() {

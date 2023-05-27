@@ -55,7 +55,7 @@
                             <tr th:each="report, info :${reportList}">
                               <th scope="row" th:text="${info.index + 1}">1</th>
                               <td th:text="${report.compra.idcompra}">Mark</td>
-                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellido}">Otto</td>
+                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellidos}">Otto</td>
                               <td><button class="btn btn-light">Ver detalles</button></td>
                               <td th:text="${'S/. ' +report.compra.monto}"></td>
                             </tr>

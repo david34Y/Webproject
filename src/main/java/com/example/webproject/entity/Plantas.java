@@ -1,45 +1,109 @@
 package com.example.webproject.entity;
 
-import jakarta.persistence.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="plantas")
 public class Plantas {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idplantas")
-    private int idplantas;
-    @Basic
-    @Column(name = "nombre")
+    private Integer idplantas;
     private String nombre;
-    @Basic
-    @Column(name = "precio")
     private double precio;
-    @Basic
-    @Column(name = "recomendacion")
     private String recomendacion;
-    @Basic
-    @Column(name = "stock")
     private int stock;
-    @Basic
-    @Column(name = "imagen")
     private byte[] imagen;
-    @Basic
-    @Column(name = "imagencontenttype")
-    private String imagencontenttype;
-    @Basic
-    @Column(name = "imagennombre")
     private String imagennombre;
+    private String imagencontenttype;
+
+    private byte[] imagen2;
+    private String imagennombre2;
+    private String imagencontenttype2;
+
+    private byte[] imagen3;
+    private String imagennombre3;
+    private String imagencontenttype3;
+
+    public byte[] getImagen2() {
+        return imagen2;
+    }
+
+    public void setImagen2(byte[] imagen2) {
+        this.imagen2 = imagen2;
+    }
+
+    public String getImagennombre2() {
+        return imagennombre2;
+    }
+
+    public void setImagennombre2(String imagennombre2) {
+        this.imagennombre2 = imagennombre2;
+    }
+
+    public String getImagencontenttype2() {
+        return imagencontenttype2;
+    }
+
+    public void setImagencontenttype2(String imagencontenttype2) {
+        this.imagencontenttype2 = imagencontenttype2;
+    }
+
+    public byte[] getImagen3() {
+        return imagen3;
+    }
+
+    public void setImagen3(byte[] imagen3) {
+        this.imagen3 = imagen3;
+    }
+
+    public String getImagennombre3() {
+        return imagennombre3;
+    }
+
+    public void setImagennombre3(String imagennombre3) {
+        this.imagennombre3 = imagennombre3;
+    }
+
+    public String getImagencontenttype3() {
+        return imagencontenttype3;
+    }
+
+    public void setImagencontenttype3(String imagencontenttype3) {
+        this.imagencontenttype3 = imagencontenttype3;
+    }
+
+    public String getImagennombre() {
+        return imagennombre;
+    }
+
+    public void setImagennombre(String imagennombre) {
+        this.imagennombre = imagennombre;
+    }
+
+    public String getImagencontenttype() {
+        return imagencontenttype;
+    }
+
+    public void setImagencontenttype(String imagencontenttype) {
+        this.imagencontenttype = imagencontenttype;
+    }
 
 
-    public int getIdplantas() {
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public Integer getIdplantas() {
         return idplantas;
     }
 
-    public void setIdplantas(int idplantas) {
+    public void setIdplantas(Integer idplantas) {
         this.idplantas = idplantas;
     }
 
@@ -74,46 +138,4 @@ public class Plantas {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-
-    public String getImagencontenttype() {
-        return imagencontenttype;
-    }
-
-    public void setImagencontenttype(String imagencontenttype) {
-        this.imagencontenttype = imagencontenttype;
-    }
-
-    public String getImagennombre() {
-        return imagennombre;
-    }
-
-    public void setImagennombre(String imagennombre) {
-        this.imagennombre = imagennombre;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Plantas plantas = (Plantas) o;
-        return idplantas == plantas.idplantas && Double.compare(plantas.precio, precio) == 0 && stock == plantas.stock && Objects.equals(nombre, plantas.nombre) && Objects.equals(recomendacion, plantas.recomendacion) && Arrays.equals(imagen, plantas.imagen) && Objects.equals(imagencontenttype, plantas.imagencontenttype) && Objects.equals(imagennombre, plantas.imagennombre);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(idplantas, nombre, precio, recomendacion, stock, imagencontenttype, imagennombre);
-        result = 31 * result + Arrays.hashCode(imagen);
-        return result;
-    }
-
-
-
 }
