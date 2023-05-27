@@ -10,6 +10,7 @@ public class Detallecompra {
     @Id
     @Column(name = "iddetallecompra")
     private int iddetallecompra;
+
     @Basic
     @Column(name = "cantidad")
     private int cantidad;
