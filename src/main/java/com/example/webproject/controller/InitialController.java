@@ -35,7 +35,8 @@ public class InitialController {
     }
 
     @GetMapping("/about")
-    public String acercade(){
+    public String acercade(Model model){
+        model.addAttribute("contador",contador);
         return "about";
     }
 

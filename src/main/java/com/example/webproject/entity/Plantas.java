@@ -1,13 +1,12 @@
 package com.example.webproject.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="plantas")
 public class Plantas {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idplantas;
     private String nombre;
     private double precio;
