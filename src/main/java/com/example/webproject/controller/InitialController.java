@@ -60,5 +60,10 @@ public class InitialController {
         return "single-post";
     }
 
+    @GetMapping("/registro")
+    public String registro(){
+        return "register";
+    }
+
 
 }
