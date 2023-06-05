@@ -1,5 +1,6 @@
 package com.example.webproject.controller;
 import com.example.webproject.entity.Compra;
+import com.example.webproject.entity.Detallecompra;
 import com.example.webproject.entity.Plantas;
 import com.example.webproject.repository.PlantasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class PlantasController {
     @Autowired
     PlantasRepository plantasRepository;
     List<Compra> listacompra =new ArrayList<>();
-    int item;
+    List<Detallecompra> listadetallecompra=new ArrayList<>();
+    int item=0;
     double totalPagar;
     int numplantas=0;
 
@@ -89,11 +91,75 @@ public class PlantasController {
         }
     }
 
-
-
-
-    //añadir carrito
+    //añadir carrito2
     @GetMapping("/add")
+    public String add2(Model model,@RequestParam("id") String id){
+        Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
+        numplantas=0;
+        int find=0;
+        int findid;
+
+        if(opt.isPresent()) {
+            //obtengo la planta
+            Plantas p = opt.get();
+            //obtengo planta
+            //detallecompra normal , primer producto
+            if(listadetallecompra.size()==0){
+                numplantas = numplantas + 1;
+                Detallecompra detallecompra=new Detallecompra();
+                //por planta un nuevo id
+                item=item+1;
+                detallecompra.setIddetallecompra(item);
+                //cantidad de esa planta
+                detallecompra.setCantidad(numplantas);
+                //setea la planta
+                detallecompra.setPlantas(p);
+                // define el precio
+                detallecompra.setPreciocompra(numplantas*p.getPrecio());
+                listadetallecompra.add(detallecompra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listadetallecompra.size();
+                model.addAttribute("contador", contador);
+                return "shop";
+            } else {
+                for(Detallecompra compra:listadetallecompra){
+                    if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
+                        find = 1;
+                        numplantas= compra.getCantidad()+1;
+                        compra.setCantidad(numplantas);
+                        compra.setPreciocompra(numplantas * p.getPrecio());
+                        model.addAttribute("productList", plantasRepository.plantas());
+                        contador=listadetallecompra.size();
+                        model.addAttribute("contador", contador);
+                        return "shop";
+                    }
+                }
+                item=item+1;
+                numplantas = numplantas + 1;
+                Detallecompra detallecompra=new Detallecompra();
+                //por planta un nuevo id
+                detallecompra.setIddetallecompra(item);
+                //cantidad de esa planta
+                detallecompra.setCantidad(numplantas);
+                //setea la planta
+                detallecompra.setPlantas(p);
+                // define el precio
+                detallecompra.setPreciocompra(numplantas*p.getPrecio());
+                listadetallecompra.add(detallecompra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listadetallecompra.size();
+                model.addAttribute("contador", contador);
+                return "shop";
+            }
+        }
+        return "shop";
+
+    }
+
+
+
+    //añadir carrito anterior
+    @GetMapping("/add2")
     public String add(Model model,@RequestParam("id") String id){
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         numplantas=0;
@@ -153,39 +219,45 @@ public class PlantasController {
     @GetMapping(value="/carrito")
     public String carrito(Model model){
         totalPagar=0.0;
-        for(int i=0;i<listacompra.size();i++){
-            totalPagar=totalPagar+ listacompra.get(i).getMonto();
+        for(int i=0;i<listadetallecompra.size();i++){
+            totalPagar=totalPagar+ listadetallecompra.get(i).getPreciocompra();
         }
         model.addAttribute("total",totalPagar);
-        model.addAttribute("carrito",listacompra);
+        model.addAttribute("carrito",listadetallecompra);
         System.out.println("+++++++++++++++++++++");
-        for (Compra compra:listacompra) {
+
+        /*for (Compra compra:listacompra) {
             System.out.println("ID "+ compra.getIdcompra());
             System.out.println("ID PLANTA "+ compra.getPlantas().getIdplantas()+
                     "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
-        }
-        model.addAttribute("contador",listacompra.size());
+        }*/
+        model.addAttribute("contador",listadetallecompra.size());
         return "checkout";
 
     }
+
+
+
+
     @GetMapping(value="/delete")
     public String del(Model model,@RequestParam("id") String id){
-        System.out.println(listacompra.size());
+       //System.out.println(listacompra.size());
+        /*
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
-        }
+        }*/
 
-        if(listacompra.size()==1){
-            listacompra.remove(0);
+        if(listadetallecompra.size()==1){
+            listadetallecompra.remove(0);
             contador=0;
             return "redirect:/shop";
         }
         System.out.println("IDD" + id);
         int id1=Integer.parseInt(id);
         int i=0;
-        for (Compra compra:listacompra) {
+        for (Detallecompra compra:listadetallecompra) {
             if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)) {
-                listacompra.remove(i);
+                listadetallecompra.remove(i);
                 contador=0;
                 return "redirect:/carrito";
             }

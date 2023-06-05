@@ -57,13 +57,13 @@
                                                      alt="Product"></a>
                                     <h5 th:text="${product.plantas.getNombre()}"></h5>
                                 </td>
-                                <td class="qty" th:text="${product.numplantas}">
+                                <td class="qty" th:text="${product.getCantidad()}">
 
                                 </td>
 
                                 <td class="price"><span th:text="|S/. ${product.plantas.getPrecio()}|"></span></td>
-                                <td class="total_price" th:text="|S/.${product.monto}|"><span></span></td>
-                                <td class="action"><a th:href="@{'/delete?id=' + ${product.getIdcompra()}}" >
+                                <td class="total_price" th:text="|S/.${product.getPreciocompra()}|"><span></span></td>
+                                <td class="action"><a th:href="@{'/delete?id=' + ${product.getIddetallecompra()}}" >
                                     <i class="icon_close"></i></a></td>
                             </tr>
                             </tbody>
