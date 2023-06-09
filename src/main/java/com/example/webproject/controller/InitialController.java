@@ -1,8 +1,16 @@
 package com.example.webproject.controller;
 
+import com.example.webproject.entity.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.example.webproject.controller.PlantasController.contador;
 
@@ -34,6 +42,8 @@ public class InitialController {
         return "/admin/managers";
     }
 
+    //USUARIO
+
     @GetMapping("/about")
     public String acercade(Model model){
         model.addAttribute("contador",contador);
@@ -63,16 +73,25 @@ public class InitialController {
         model.addAttribute("contador",contador);
         return "index";
     }
-
     @GetMapping("/portfolio")
     public String portafolio(){
         return "portfolio";
     }
+
+
+    //--------------login controlller-----------------
+
+
+
+
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("contador",contador);
         return "login";
     }
+
+
+
 
 
 
