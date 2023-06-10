@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header th:replace="fragments/fragment_general2 :: header-area"></header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>Productos de Seleccionados</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Productos Seleccionados</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Checkout Area Start ##### -->
+    <div class="checkout_area mb-100" th:if="${contador>0}">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-lg-7">
+                    <div class="cart-table clearfix">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Productos</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="product, info : ${carrito}">
+                                <td class="cart_product_img">
+                                    <a href="#"><img th:src="@{|imagen/${product.plantas.idplantas}|}"
+                                                     alt="Product"></a>
+                                    <h5 th:text="${product.plantas.getNombre()}"></h5>
+                                </td>
+                                <td class="qty" th:text="${product.getCantidad()}">
+
+                                </td>
+
+                                <td class="price"><span th:text="|S/. ${product.plantas.getPrecio()}|"></span></td>
+                                <td class="total_price" th:text="|S/.${product.getPreciocompra()}|"><span></span></td>
+                                <td class="action"><a th:href="@{'/delete_cli?id=' + ${product.getIddetallecompra()}}" >
+                                    <i class="icon_close"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="checkout-content">
+                        <h5 class="title--">Orden</h5>
+                        <div class="subtotal d-flex justify-content-between align-items-center">
+                            <h5>Precio Total</h5>
+                            <h5  th:text="|S/. ${total}|"></h5>
+                        </div>
+
+                        <div class="checkout-btn mt-30">
+                            <a href="#" class="btn alazea-btn w-100"
+                               data-toggle="modal" data-target="#exampleModal" >Procesar Compra</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkout_area mb-100" th:if="${contador==0}">
+        <div class="container">
+            <div class="row justify-content-between">
+        <h2> Su carrito está vacio</h2>
+            </div>
+            </div>
+    </div>
+    <!-- ##### Checkout Area End ##### -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Para finalizar o editar su compra</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Registrese o inicie sesión</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a th:href="@{'/registro'}" type="button" class="btn btn-danger">Registro</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+
+</html>

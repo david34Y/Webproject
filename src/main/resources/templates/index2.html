@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+<head th:replace="fragments/fragment_general :: head(titulo='Plantas')">
 </head>
 
 <body>
     <!-- Preloader -->
-    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+    <div th:replace="fragments/fragment_general :: preloader"></div>
 
     <!-- ##### Header Area Start ##### -->
-    <header th:replace="fragments/fragment_general2 :: header-area">
+    <header th:replace="fragments/fragment_general :: header-area">
+
     </header>
     <!-- ##### Header Area End ##### -->
 
@@ -698,11 +699,11 @@
     </section> -->
 
     <!-- ##### Footer Area Start ##### -->
-    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <footer th:replace="fragments/fragment_general :: footer"></footer>
     <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Files ##### -->
-    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+    <div th:replace="fragments/fragment_general :: jsfiles"></div>
 </body>
 
 </html>

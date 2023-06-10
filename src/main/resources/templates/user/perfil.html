@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+<body>
+<div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+<!-- ##### Header Area Start ##### -->
+<header th:replace="fragments/fragment_general2 :: header-area"></header>
+
+<!-- ##### Header Area Start ##### -->
+
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+  <!-- Top Breadcrumb Area -->
+  <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+    <h2>CONTACTENOS</h2>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Perfil</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Contact Area Info Start ##### -->
+<div class="contact-area-info section-padding-0-100">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <!-- Contact Thumbnail -->
+      <div class="col-12 col-md-6">
+        <div class="contact--thumbnail">
+          <img src="img/bg-img/descarga.png" alt="">
+        </div>
+      </div>
+
+      <div class="col-12 col-md-5">
+        <h3>Nombre: <span th:text="${usuario.nombre}"></span></h3>
+        <p>Número telefónico: <span th:text="${usuario.password}"></span></p>
+        <p>Correo: <span th:text="${usuario.correo}"></span></p>
+        <button class="btn alazea-btn" onclick="editarPerfil()">Editar</button>
+      </div>
+    </div>
+    </div>
+  </div>
+<!-- ##### Contact Area Info End ##### -->
+
+<!-- ##### Compras realizadas ##### -->
+<div class="compras-section">
+  <div class="container">
+    <h3>Compras realizadas</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Item</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Precio Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Lavanda</td>
+          <td>2</td>
+          <td>$46.00</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Cactus</td>
+          <td>1</td>
+          <td>$46.00</td>
+        </tr>
+        <!-- Agrega más filas según los datos de las compras -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ##### ACA DAME LA TABLA ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer th:replace="fragments/fragment_general2 :: footer"></footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- ##### All Javascript Files ##### -->
+<div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+
+</html>

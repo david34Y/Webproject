@@ -92,14 +92,35 @@ public class InitialController {
 
 
 
-
-
-
     @GetMapping("/single-portfolio")
     public String portafoliosolo(Model model){
         model.addAttribute("contador",contador);
         return "single-portfolio";
     }
+
+    //-----------------client controller---
+    @GetMapping("/index_cli")
+    public String indice_cliente(Model model){
+
+        model.addAttribute("contador",contador);
+        return "/user/index";
+    }
+
+    @GetMapping("/about_cli")
+    public String acercade_cliente(Model model){
+        model.addAttribute("contador",contador);
+        return "user/about";
+    }
+
+    @GetMapping("/cart_cli")
+    public String carrito_cliente(){
+        return "user/cart";
+    }
+
+
+
+
+
 
 
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+<body>
+    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header th:replace="fragments/fragment_general2 :: header-area"></header>
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>PUBLICACIONES</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">PUBLICACIONES</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <section class="alazea-blog-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="shop-sorting-data d-flex flex-wrap align-items-center justify-content-between"
+                         th:each="publis, info : ${publicaciones}" >
+
+                        <!-- Single Blog Post Area -->
+                        <div class="col-12 col-lg-6">
+                            <div class="single-blog-post mb-50">
+                                <div class="post-thumbnail mb-30">
+
+                                    <a th:href="@{'/single_post?id=' + ${publis.idpublicacion}}">
+                                        <img th:src="@{|imagen2/${publis.idpublicacion}|}"
+                                             class="img-fluid" style="height: 300px;" >
+                                    </a>
+                                </div>
+                                <div class="post-content">
+                                    <a th:href="@{'/single_post?id=' + ${publis.idpublicacion}}" class="post-title">
+                                        <h5 th:text="${publis.titulo}"></h5>
+                                    </a>
+                                    <!--
+                                    <div class="post-meta">
+                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
+                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
+                                    </div>-->
+                                    <p class="post-excerpt" th:text="${publis.resumen}"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <!-- ##### Footer Area Start ##### -->
+    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+
+<body>
+    <!-- Preloader -->
+    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header th:replace="fragments/fragment_general2 :: header-area"></header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>Detalles</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Single Product Details Area Start ##### -->
+    <section th:if="${!contador.equals('0')}" class="single_product_details_area mb-50">
+        <div class="produts-details--content mb-50">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-12 col-md-6 col-lg-5">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a class="product-img" th:href="@{|imagen/${idplantas}|}" title="Product Image">
+                                        <img class="d-block w-100" style="height: 300px;"  th:src="@{|imagen/${idplantas}|}" alt="1">
+                                    </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="product-img" th:href="@{|imagen22/${idplantas}|}" title="Product Image">
+                                        <img class="d-block w-100 "  style="height: 300px;" th:src="@{|imagen22/${idplantas}|}" alt="1">
+                                    </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="product-img" th:href="@{|imagen3/${idplantas}|}" title="Product Image">
+                                        <img class="d-block w-100" style="height: 300px;"  th:src="@{|imagen3/${idplantas}|}" alt="1">
+                                    </a>
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0"
+                                        th:style="'background-image: url(' + @{|imagen/${idplantas}|} + ');'"
+                                    </li>
+                                    <li data-target="#product_details_slider" data-slide-to="1"
+                                        th:style="'background-image: url(' + @{|imagen22/${idplantas}|} + ');'">
+                                    </li>
+                                    <li data-target="#product_details_slider" data-slide-to="2"
+                                        th:style="'background-image: url(' + @{|imagen3/${idplantas}|} + ');'">
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="single_product_desc" th:object="${planta}">
+                            <h4 class="title" th:text="|${planta.getNombre()}|"></h4>
+                            <h4 class="price" th:text="|S/. ${planta.getPrecio()}|"></h4>
+                            <div class="short_overview">
+                                <h5 th:text="|Ambientes Recomendados: ${planta.getRecomendacion()}|"></h5>
+                                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo.</h5>
+                            </div>
+
+                            <h4 class="price" th:if="${planta.stock==0}"th:text="|Sin stock|"> </h4>
+                            <h4 class="price" th:if="${planta.stock>0}" th:text="|Stock : ${planta.getStock()} unid.|"> </h4>
+
+
+                                <!-- Add to Cart Form -->
+                                <a  th:if="${planta.stock>0}" th:href="@{'/add?id=' + ${planta.getIdplantas()}}" value="5" class="btn alazea-btn ml-15">Add to cart</a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product_details_tab clearfix">
+                        <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+                            <li class="nav-item">
+                                <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="description">
+                                <div class="description_area">
+                                    <p>Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio.</p>
+                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum.</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="addi-info">
+                                <div class="additional_info_area">
+                                    <p>What should I do if I receive a damaged parcel?
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span></p>
+                                    <p>I have received my order but the wrong item was delivered to me.
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span></p>
+                                    <p>Product Receipt and Acceptance Confirmation Process
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span></p>
+                                    <p>How do I cancel my order?
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span></p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                <div class="reviews_area">
+                                    <ul>
+                                        <li>
+                                            <div class="single_user_review mb-15">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Quality</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="single_user_review mb-15">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Design</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="single_user_review">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Value</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="submit_a_review_area mt-50">
+                                    <h4>Submit A Review</h4>
+                                    <form action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group d-flex align-items-center">
+                                                    <span class="mr-15">Your Ratings:</span>
+                                                    <div class="stars">
+                                                        <input type="radio" name="star" class="star-1" id="star-1">
+                                                        <label class="star-1" for="star-1">1</label>
+                                                        <input type="radio" name="star" class="star-2" id="star-2">
+                                                        <label class="star-2" for="star-2">2</label>
+                                                        <input type="radio" name="star" class="star-3" id="star-3">
+                                                        <label class="star-3" for="star-3">3</label>
+                                                        <input type="radio" name="star" class="star-4" id="star-4">
+                                                        <label class="star-4" for="star-4">4</label>
+                                                        <input type="radio" name="star" class="star-5" id="star-5">
+                                                        <label class="star-5" for="star-5">5</label>
+                                                        <span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Nickname</label>
+                                                    <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="options">Reason for your rating</label>
+                                                    <select class="form-control" id="options">
+                                                          <option>Quality</option>
+                                                          <option>Value</option>
+                                                          <option>Design</option>
+                                                          <option>Price</option>
+                                                          <option>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="comments">Comments</label>
+                                                    <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn alazea-btn">Submit Your Review</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+    <section th:if="${contador.equals('0')}" class="single_product_details_area mb-50">
+        <div class="produts-details--content mb-50">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <h2>Su carrito de compras está vacio</h2>
+                </div>
+            </div>
+        </div>
+
+        <!--
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product_details_tab clearfix">
+                        <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+                            <li class="nav-item">
+                                <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="description">
+                                <div class="description_area">
+                                    <p>Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio.</p>
+                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum.</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="addi-info">
+                                <div class="additional_info_area">
+                                    <p>What should I do if I receive a damaged parcel?
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span></p>
+                                    <p>I have received my order but the wrong item was delivered to me.
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span></p>
+                                    <p>Product Receipt and Acceptance Confirmation Process
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span></p>
+                                    <p>How do I cancel my order?
+                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span></p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                <div class="reviews_area">
+                                    <ul>
+                                        <li>
+                                            <div class="single_user_review mb-15">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Quality</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="single_user_review mb-15">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Design</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="single_user_review">
+                                                <div class="review-rating">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>for Value</span>
+                                                </div>
+                                                <div class="review-details">
+                                                    <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="submit_a_review_area mt-50">
+                                    <h4>Submit A Review</h4>
+                                    <form action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group d-flex align-items-center">
+                                                    <span class="mr-15">Your Ratings:</span>
+                                                    <div class="stars">
+                                                        <input type="radio" name="star" class="star-1" id="star-1">
+                                                        <label class="star-1" for="star-1">1</label>
+                                                        <input type="radio" name="star" class="star-2" id="star-2">
+                                                        <label class="star-2" for="star-2">2</label>
+                                                        <input type="radio" name="star" class="star-3" id="star-3">
+                                                        <label class="star-3" for="star-3">3</label>
+                                                        <input type="radio" name="star" class="star-4" id="star-4">
+                                                        <label class="star-4" for="star-4">4</label>
+                                                        <input type="radio" name="star" class="star-5" id="star-5">
+                                                        <label class="star-5" for="star-5">5</label>
+                                                        <span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Nickname</label>
+                                                    <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="options">Reason for your rating</label>
+                                                    <select class="form-control" id="options">
+                                                          <option>Quality</option>
+                                                          <option>Value</option>
+                                                          <option>Design</option>
+                                                          <option>Price</option>
+                                                          <option>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="comments">Comments</label>
+                                                    <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn alazea-btn">Submit Your Review</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+
+
+    <!-- ##### Single Product Details Area End ##### -->
+
+    <!-- ##### Related Product Area Start ##### -->
+
+    <!-- ##### Related Product Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+
+</html>

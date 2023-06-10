@@ -297,4 +297,206 @@ public class    PlantasController {
 
         return "shop-details";
     }
+
+    @GetMapping(value="/shop_cli")
+    public String inicio_cliente(Model model){
+
+        model.addAttribute("productList", plantasRepository.plantas());
+
+        model.addAttribute("contador",contador);
+        if(plantasRepository.plantas().get(0).getNombre().isEmpty()){
+            System.out.println("FFFFFFFFF");
+        }
+        System.out.println(plantasRepository.plantas().get(0).getNombre());
+
+        return "user/shop";
+    }
+
+    @GetMapping("/shopdetails_cli")
+    public String detallestienda_cliente(Model model,@RequestParam("id") String id){
+        Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
+        if(opt.isPresent()) {
+            List<Plantas>planta1=plantasRepository.findplants(Integer.parseInt(id));
+            model.addAttribute("idplantas",planta1.get(0).getIdplantas());
+            model.addAttribute("planta",planta1.get(0));
+            model.addAttribute("contador",contador);
+            return "user/shop-details";
+        }
+
+        return "user/shop-details";
+    }
+
+    @GetMapping(value="/delete_cli")
+    public String del_cliente(Model model,@RequestParam("id") String id){
+        //System.out.println(listacompra.size());
+        /*
+        for(Compra compra1:listacompra){
+            System.out.println(compra1.getPlantas().getNombre());
+        }*/
+
+        if(listadetallecompra.size()==1){
+            listadetallecompra.remove(0);
+            contador=0;
+            return "redirect:/shop_cli";
+        }
+        System.out.println("IDD" + id);
+        int id1=Integer.parseInt(id);
+        int i=0;
+        for (Detallecompra compra:listadetallecompra) {
+            if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)) {
+                listadetallecompra.remove(i);
+                contador=0;
+                return "redirect:/carrito_cli";
+            }
+            i=i+1;
+        }
+
+
+        return "redirect:/carrito_cli";
+
+    }
+
+    @GetMapping(value="/carrito_cli")
+    public String carrito_cliente(Model model){
+        totalPagar=0.0;
+        for(int i=0;i<listadetallecompra.size();i++){
+            totalPagar=totalPagar+ listadetallecompra.get(i).getPreciocompra();
+        }
+        model.addAttribute("total",totalPagar);
+        model.addAttribute("carrito",listadetallecompra);
+        System.out.println("+++++++++++++++++++++");
+
+        /*for (Compra compra:listacompra) {
+            System.out.println("ID "+ compra.getIdcompra());
+            System.out.println("ID PLANTA "+ compra.getPlantas().getIdplantas()+
+                    "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
+        }*/
+        model.addAttribute("contador",listadetallecompra.size());
+        return "user/checkout";
+
+    }
+
+    //añadir carrito2
+    @GetMapping("/add_cli")
+    public String add2_cliente(Model model,@RequestParam("id") String id){
+        Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
+        numplantas=0;
+        int find=0;
+        int findid;
+
+        if(opt.isPresent()) {
+            //obtengo la planta
+            Plantas p = opt.get();
+            //obtengo planta
+            //detallecompra normal , primer producto
+            if(listadetallecompra.size()==0){
+                numplantas = numplantas + 1;
+                Detallecompra detallecompra=new Detallecompra();
+                //por planta un nuevo id
+                item=item+1;
+                detallecompra.setIddetallecompra(item);
+                //cantidad de esa planta
+                detallecompra.setCantidad(numplantas);
+                //setea la planta
+                detallecompra.setPlantas(p);
+                // define el precio
+                detallecompra.setPreciocompra(numplantas*p.getPrecio());
+                listadetallecompra.add(detallecompra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listadetallecompra.size();
+                model.addAttribute("contador", contador);
+                return "user/shop";
+            } else {
+                for(Detallecompra compra:listadetallecompra){
+                    if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
+                        find = 1;
+                        numplantas= compra.getCantidad()+1;
+                        compra.setCantidad(numplantas);
+                        compra.setPreciocompra(numplantas * p.getPrecio());
+                        model.addAttribute("productList", plantasRepository.plantas());
+                        contador=listadetallecompra.size();
+                        model.addAttribute("contador", contador);
+                        return "user/shop";
+                    }
+                }
+                item=item+1;
+                numplantas = numplantas + 1;
+                Detallecompra detallecompra=new Detallecompra();
+                //por planta un nuevo id
+                detallecompra.setIddetallecompra(item);
+                //cantidad de esa planta
+                detallecompra.setCantidad(numplantas);
+                //setea la planta
+                detallecompra.setPlantas(p);
+                // define el precio
+                detallecompra.setPreciocompra(numplantas*p.getPrecio());
+                listadetallecompra.add(detallecompra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listadetallecompra.size();
+                model.addAttribute("contador", contador);
+                return "user/shop";
+            }
+        }
+        return "user/shop";
+
+    }
+
+
+
+    //añadir carrito anterior
+    @GetMapping("/add2_cli")
+    public String add_cliente(Model model,@RequestParam("id") String id){
+        Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
+        numplantas=0;
+        int find=0;
+        int findid;
+
+        if(opt.isPresent()) {
+            //obtengo la planta
+            Plantas p = opt.get();
+            //obtengo planta
+            if(listacompra.size()==0){
+                numplantas = numplantas + 1;
+                Compra compra = new Compra();
+                compra.setIdcompra(item);
+                compra.setNumplantas(numplantas);
+                compra.setIdcompra(p.getIdplantas());
+                compra.setPlantas(p);
+                compra.setMonto(numplantas * p.getPrecio());
+                listacompra.add(compra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listacompra.size();
+                model.addAttribute("contador", contador);
+                return "user/shop";
+            } else {
+                for(Compra compra:listacompra){
+                    if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
+                        find = 1;
+                        numplantas= compra.getNumplantas()+1;
+                        compra.setNumplantas(numplantas);
+                        compra.setMonto(numplantas * p.getPrecio());
+                        model.addAttribute("productList", plantasRepository.plantas());
+                        contador=listacompra.size();
+                        model.addAttribute("contador", contador);
+                        return "user/shop";
+                    }
+                }
+                numplantas = numplantas + 1;
+                Compra compra = new Compra();
+                compra.setIdcompra(item);
+                compra.setNumplantas(numplantas);
+                compra.setIdcompra(p.getIdplantas());
+                compra.setPlantas(p);
+                compra.setMonto(numplantas * p.getPrecio());
+                listacompra.add(compra);
+                model.addAttribute("productList", plantasRepository.plantas());
+                contador=listacompra.size();
+                model.addAttribute("contador", contador);
+                return "user/shop";
+            }
+
+        }
+        return "user/shop";
+
+    }
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general :: head(titulo='Plantas')">
+</head>
+
+
+<body>
+    <!-- Preloader -->
+    <div th:replace="fragments/fragment_general :: preloader"></div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header th:replace="fragments/fragment_general :: header-area"></header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>PUBLICACIÓN
+            </h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Single Blog Post</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Blog Content Area Start ##### -->
+    <section class="blog-content-area section-padding-0-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Blog Posts Area -->
+                <div class="col-12 col-md-8">
+                    <div class="blog-posts-area">
+
+                        <!-- Post Details Area -->
+                        <div class="single-post-details-area">
+                            <div class="post-content" th:object="${publicacion}">
+                                <h4 class="post-title" th:text="|${publicacion.getTitulo()}|"></h4>
+                                <!--
+                                <div class="post-meta mb-30">
+                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
+                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
+                                </div> -->
+                                <div class="post-thumbnail mb-30">
+                                    <center>
+                                    <img th:src="@{|imagen2/${publicacion.idpublicacion}|}"
+                                         class="img-fluid" style="height: 300px;" ></center>
+                                </div>
+                                <p th:text="|${publicacion.getTexto()}|"></p>
+
+                            </div>
+                        </div>
+
+                        <!-- Post Tags & Share -->
+                        <div class="post-tags-share d-flex justify-content-between align-items-center">
+                            <!-- Tags
+                            <ol class="popular-tags d-flex align-items-center flex-wrap">
+                                <li><span>Tag:</span></li>
+                                <li><a href="#">PLANTS</a></li>
+                                <li><a href="#">CACTUS</a></li>
+                            </ol> -->
+                            <!-- Share -->
+                            <div class="post-share">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Blog Sidebar Area -->
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Content Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer th:replace="fragments/fragment_general :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general :: jsfiles"></div>
+</body>
+
+</html>

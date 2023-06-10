@@ -57,28 +57,29 @@
               <!-- Navbar Start -->
               <div class="classynav">
                 <ul>
-                  <li><a th:href="@{index}">Home</a></li>
+                  <li><a th:href="@{index_cli}">Home</a></li>
 
-                  <li><a th:href="@{about}">About</a></li>
+                  <li><a th:href="@{about_cli}">About</a></li>
                   <!-- PAGES-->
                   <!--  -->
-                  <li><a th:href="@{shop}">Comprar</a></li>
-                  <li><a th:href="@{'/publicaciones'}">Publicaciones</a></li>
-                  <li><a th:href="@{contact}">Contactenos</a></li>
+                  <li><a th:href="@{shop_cli}">Comprar</a></li>
+                  <li><a th:href="@{'publicaciones_cli'}">Publicaciones</a></li>
+                  <li><a th:href="@{contact_cli}">Contactenos</a></li>
                   <li>
                     <div class="cart">
-                      <a th:href="@{'/carrito'}">
+                      <a th:href="@{'carrito_cli'}">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span>Cart
                           <span class="cart-quantity"
-                                th:text="0"></span>
+                                th:text="|(${contador})|"></span>
 
                         </span>
                       </a>
                     </div>
                   </li>
+                  <li><a th:href="@{perfil_cli}">Perfil</a></li>
                   <li><div class="login">
-                    <a th:href="@{login}"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                    <a th:href="@{login}"><i class="fa fa-user" aria-hidden="true"></i> <span>Logout</span></a>
                   </div></li>
 
 

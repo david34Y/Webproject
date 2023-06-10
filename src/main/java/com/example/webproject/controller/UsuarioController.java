@@ -1,10 +1,10 @@
 package com.example.webproject.controller;
 
+import com.example.webproject.entity.Compra;
 import com.example.webproject.entity.Consulta;
+import com.example.webproject.entity.Detallecompra;
 import com.example.webproject.entity.Usuario;
-import com.example.webproject.repository.ConsultaRepository;
-import com.example.webproject.repository.RolRepository;
-import com.example.webproject.repository.UsuarioRepository;
+import com.example.webproject.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +31,12 @@ import static com.example.webproject.controller.PlantasController.contador;
 public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    CompraRepository compraRepository;
+
+    @Autowired
+    DetallecompraRepository detallecompraRepository;
 
     @Autowired
     RolRepository rolRepository;
@@ -100,6 +106,13 @@ public class UsuarioController {
         return "contact";
     }
 
+    @GetMapping("/contact_cli")
+    public String contacto_cliente(@ModelAttribute("consultante") Consulta consultante, Model model){
+        model.addAttribute("contador",contador);
+        return "user/contact";
+    }
+
+
     @PostMapping("/guardarconsultante")
     public String guardarConsultante(@ModelAttribute("consultante") @Valid Consulta consultante, BindingResult bindingResult,
                                      Model model, RedirectAttributes attr)  {
@@ -134,6 +147,31 @@ public class UsuarioController {
 
         }
     }
+
+    //------------------------PERFIL---------------------
+
+    @GetMapping("/perfil_cli")
+    public String perfil_cliente(Model model) {
+        int usuarioId = 4; // Reemplaza 1 con el ID del usuario que deseas buscar
+        Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+        /*
+        List<Compra> compras = compraRepository.findComprasByUsuarioId(usuarioId);
+
+        List<List<Detallecompra>> detallesCompras = new ArrayList<>();
+        for (Compra compra : compras) {
+            List<Detallecompra> detallesCompra = detallecompraRepository.findByComprasID(compra.getIdcompra());
+            detallesCompras.add(detallesCompra);
+        }
+        model.addAttribute("detallesCompras", detallesCompras);
+
+         */
+        model.addAttribute("contador", contador);
+        model.addAttribute("usuario", usuario);
+
+        return "user/perfil";
+    }
+
+
 
 
 

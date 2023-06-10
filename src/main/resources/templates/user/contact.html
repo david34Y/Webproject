@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+<body>
+<div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+<!-- ##### Header Area Start ##### -->
+<header th:replace="fragments/fragment_general2 :: header-area"></header>
+
+    <!-- ##### Header Area Start ##### -->
+
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>CONTACTENOS</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Contact Area Info Start ##### -->
+    <div class="contact-area-info section-padding-0-100">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <!-- Contact Thumbnail -->
+                <div class="col-12 col-md-6">
+                    <div class="contact--thumbnail">
+                        <img src="img/bg-img/25.jpg" alt="">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                        <h2>CONTACTENOS</h2>
+                        <p>Estamos mejorando para brindarte el mejor servicio.</p>
+                    </div>
+                    <!-- Contact Information -->
+                    <div class="contact-information">
+                        <p><span>Dirección:</span> Av. Universitaria 1801, San Miguel 15088</p>
+                        <p><span>Número:</span> +51 945467394</p>
+                        <p><span>Email:</span> dontulipan@gmail.com</p>
+                        <p><span>Horario de atención:</span> Lun - Vier: 8 AM a 9 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Contact Area Info End ##### -->
+
+    <!-- ##### Contact Area Start ##### -->
+    <section class="contact-area">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="container">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                        <h2>MANTEGAMONOS EN CONTACTO</h2>
+                        <p>Envienos un mensaje, le responderemos pronto</p>
+                    </div>
+                    <!-- Contact Form Area -->
+                    <div class="contact-form-area mb-100">
+                        <form  method="post" th:action="@{/guardarconsultante}"
+                              th:object="${consultante}">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <input type="text" class="form-control" style="color: black"
+                                           id="nombrecontacto"
+                                           placeholder="Nombre" th:field="*{nombrecontacto}" >
+                                    <div style="color: red; font-size: small; text-align: left"
+                                         th:if="${#fields.hasErrors('nombrecontacto')}"
+                                         th:errors="*{nombrecontacto}"></div>
+
+                                </div>
+                                <div class="col-12 col-md-6">
+
+                                        <input type="email" class="form-control"
+                                               style="color: black"
+                                               id="correocontacto" placeholder="Email" th:field="*{correocontacto}">
+                                    <div style="color: red; font-size: small; text-align: left"
+                                         th:if="${#fields.hasErrors('correocontacto')}" th:errors="*{correocontacto}"></div>
+
+                                </div>
+                                <div class="col-12">
+
+                                        <input type="text"
+                                               style="color: black"
+                                               class="form-control" id="asunto" placeholder="Asunto"
+                                               th:field="*{asunto}"
+                                        >
+                                    <div style="color: red; font-size: small; text-align: left"
+                                         th:if="${#fields.hasErrors('asunto')}" th:errors="*{asunto}"></div>
+
+                                </div>
+                                <div class="col-12">
+
+                                        <textarea class="form-control"
+                                                  style="color: black"
+                                                  name="contenido" id="contenido" cols="30" rows="10" placeholder="Mensaje"
+                                                  th:field="*{contenido}"
+                                        ></textarea>
+                                    <div style="color: red; font-size: small; text-align: left"
+                                         th:if="${#fields.hasErrors('contenido')}" th:errors="*{contenido}"></div>
+
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn alazea-btn mt-15">Envie un mensaje</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Contact Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+
+</html>

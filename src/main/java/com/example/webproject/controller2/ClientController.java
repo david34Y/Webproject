@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,22 +30,25 @@ public class ClientController {
     @Autowired
     PublicacionRepository publicacionRepository;
 
+    List<Compra> listacompra =new ArrayList<>();
+    List<Detallecompra> listadetallecompra=new ArrayList<>();
     int item=0;
     double totalPagar;
     int numplantas=0;
 
     static int contador=0;
+
     @GetMapping("/index")
     public String indice(Model model){
 
         model.addAttribute("contador",contador);
-        return "index";
+        return "index2";
     }
 
     @GetMapping("/about")
     public String acercade(Model model){
         model.addAttribute("contador",contador);
-        return "about";
+        return "user/about";
     }
 
     @GetMapping(value="/shop")
@@ -57,7 +62,7 @@ public class ClientController {
         }
         System.out.println(plantasRepository.plantas().get(0).getNombre());
 
-        return "shop";
+        return "user/shop";
     }
 
     //Detalle por planta
@@ -72,7 +77,7 @@ public class ClientController {
             return "shop-details";
         }
 
-        return "shop-details";
+        return "user/shop-details";
     }
 
     //---------------------PUBLICACIONES-----------------------------------
@@ -87,7 +92,7 @@ public class ClientController {
         }
         model.addAttribute("publicaciones",publicaciones);
 
-        return "blog";
+        return "user/blog";
     }
 
 
@@ -107,7 +112,7 @@ public class ClientController {
             model.addAttribute("contador",contador);
             return "single-post";
         }
-        return "single-post";
+        return "user/single-post";
     }
 
     //--------------------CONTACTO------------------------
@@ -115,13 +120,10 @@ public class ClientController {
     @GetMapping("/contact")
     public String contacto(@ModelAttribute("consultante") Consulta consultante, Model model){
         model.addAttribute("contador",contador);
-        return "contact";
+        return "user/contact";
     }
 
     //---------------------------------CARRITO---------------------------------------------------
-
-    List<Compra> listacompra =new ArrayList<>();
-    List<Detallecompra> listadetallecompra=new ArrayList<>();
 
 
 
@@ -141,7 +143,7 @@ public class ClientController {
                     "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
         }*/
         model.addAttribute("contador",listadetallecompra.size());
-        return "checkout";
+        return "user/checkout";
 
     }
 
@@ -206,7 +208,7 @@ public class ClientController {
                 return "shop";
             }
         }
-        return "shop";
+        return "user/shop";
 
     }
 
@@ -265,7 +267,7 @@ public class ClientController {
             }
 
         }
-        return "shop";
+        return "user/shop";
 
     }
 

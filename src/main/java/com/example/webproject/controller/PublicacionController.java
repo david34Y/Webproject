@@ -41,6 +41,20 @@ public class PublicacionController {
         return "blog";
     }
 
+    @GetMapping("/publicaciones_cli")
+    public String blog_cliente(Model model){
+        model.addAttribute("contador",contador);
+        List<Publicacion> publicaciones=publicacionRepository.publicaciones();
+        for(Publicacion publicacion:publicaciones){
+            System.out.println(publicacion.getResumen());
+            System.out.println(publicacion.getTexto());
+            System.out.println(publicacion.getTitulo());
+        }
+        model.addAttribute("publicaciones",publicaciones);
+
+        return "user/blog";
+    }
+
     @GetMapping("/imagen2/{id}")
     public ResponseEntity<byte[]> mostrarImagen(@PathVariable("id") int id){
         Optional<Publicacion> opt= publicacionRepository.findById(id);

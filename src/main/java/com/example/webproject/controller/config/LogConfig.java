@@ -1,18 +1,18 @@
 package com.example.webproject.controller.config;
-
+/*
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
-public class LogConfig extends WebSecurityConfiguration {
+public class LogConfig extends WebSecurityConfigurer {
 
-    //@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
 
     }
 }
+*/
