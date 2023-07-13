@@ -42,14 +42,14 @@
           <p>Ingrese sus credenciales</p>
         </div>
 
-        <form method="post" class="user" >
+        <form method="post" action="/login/signin">
 
           <div class="form-group row">
             <div class="col-sm-6 mb-2 mb-sm-0">
               <label style="color: black">Correo electrónico</label>
 
               <input type="text" class="form-control" style="border-color:lightgray"
-                     id="exampleCorreo"
+                     name="exampleCorreo"
                      placeholder="Correo electrónico">
               <!--
               <div style="color: red; font-size: small; text-align: left"
@@ -62,7 +62,7 @@
           <div class="form-group row">
             <div class="col-sm-6 mb-2 mt-2 mb-sm-0">
               <label style="color: black">Contraseña</label>
-              <input type="password" class="form-control" style="border-color:lightgray" id="inputPassword1"
+              <input type="password" class="form-control" style="border-color:lightgray" name="inputPassword1"
 
                      placeholder="La contraseña debe contar con al menos 8 caracteres.">
               <!--
