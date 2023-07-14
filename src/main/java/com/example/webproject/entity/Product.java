@@ -1,5 +1,6 @@
 package com.example.webproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,32 +9,44 @@ import jakarta.persistence.Id;
 @Entity
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String productId;
 
+    @JsonProperty("discountAvailable")
     private String discountAvialable;
 
+    @JsonProperty("discountNote")
     private int discountNote;
 
+    @JsonProperty("discountPrice")
     private int discountPrice;
 
+    @JsonProperty("originalPrice")
     private int originalPrice;
 
+    @JsonProperty("productCategory")
     private String productCategory;
 
+    @JsonProperty("productDescription")
     private String productDescription;
 
-    private String  productIcon;
+    @JsonProperty("productIcon")
+    private String productIcon;
 
+    @JsonProperty("productQuantity")
     private int productQuantity;
 
+    @JsonProperty("productTitle")
     private String productTitle;
 
-    private int timesptamp;
+    @JsonProperty("timestamp")
+    private long timesptamp;
 
+    @JsonProperty("uid")
     private String uid;
+
+    // getters and setters
 
 
     public String getProductId() {
@@ -116,11 +129,11 @@ public class Product {
         this.productTitle = productTitle;
     }
 
-    public int getTimesptamp() {
+    public long getTimesptamp() {
         return timesptamp;
     }
 
-    public void setTimesptamp(int timesptamp) {
+    public void setTimesptamp(long timesptamp) {
         this.timesptamp = timesptamp;
     }
 

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -151,11 +152,14 @@ public class UsuarioController {
     //------------------------PERFIL---------------------
 
     @GetMapping("/perfil_cli")
-    public String perfil_cliente(Model model) {
-        int usuarioId = 4; // Reemplaza 1 con el ID del usuario que deseas buscar
-        Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+    public String perfil_cliente(Model model, Principal principal) {
         /*
-        List<Compra> compras = compraRepository.findComprasByUsuarioId(usuarioId);
+        String usuarioCorreo = principal.getName(); // Obtiene el correo del usuario logueado
+        Usuario usuario = usuarioRepository.findUsuarioByCorreo(usuarioCorreo);
+
+         */
+        //reemplaza el 4 con el id del usuario
+        List<Compra> compras = compraRepository.findComprasByUsuarioId(4);
 
         List<List<Detallecompra>> detallesCompras = new ArrayList<>();
         for (Compra compra : compras) {
@@ -163,13 +167,11 @@ public class UsuarioController {
             detallesCompras.add(detallesCompra);
         }
         model.addAttribute("detallesCompras", detallesCompras);
-
-         */
-        model.addAttribute("contador", contador);
-        model.addAttribute("usuario", usuario);
+        //model.addAttribute("usuario", usuario);
 
         return "user/perfil";
     }
+
 
 
 

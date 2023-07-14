@@ -49,10 +49,10 @@
                         <td th:text="${product.productQuantity}"></td>
                         <td th:text="${product.originalPrice}"></td>
                         <td th:text="${product.discountPrice}"></td>
-                        <td th:text="${product.discountAvailable}"></td>
-                        <td><a class="btn btn-primary" th:href="@{'/product/edit' + '?id=' + ${product.id}}">Editar</a>
+                        <td th:text="${product.discountAvialable    }"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/product/edit' + '?id=' + ${product.uid}}">Editar</a>
                         </td>
-                        <td><a class="btn btn-danger" th:href="@{'/product/delete' + '?id=' + ${product.id}}">Borrar</a>
+                        <td><a class="btn btn-danger" th:href="@{'/product/delete' + '?id=' + ${product.uid}}">Borrar</a>
                         </td>
                     </tr>
                 </tbody>

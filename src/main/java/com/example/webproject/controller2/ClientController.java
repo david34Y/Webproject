@@ -45,7 +45,7 @@ public class ClientController {
     @GetMapping({"/list", "", "/"})
     public String listarProductos(Model model) {
         model.addAttribute("listaProductos", productDao.listarProductos());
-        return "product/list";
+        return "user/list";
     }
 
     @GetMapping("/index")

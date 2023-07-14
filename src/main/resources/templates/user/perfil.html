@@ -75,24 +75,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>Lavanda</td>
-          <td>2</td>
-          <td>$46.00</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Cactus</td>
-          <td>1</td>
-          <td>$46.00</td>
-        </tr>
-        <!-- Agrega más filas según los datos de las compras -->
+        <!-- Iterar sobre las compras y detalles de compras -->
+        <th:block th:each="detalleCompra : ${detallesCompras}">
+          <tr>
+            <td th:text="${detalleCompra.iddetallecompra}"></td>
+            <td th:text="${detalleCompra.planta.nombre}"></td>
+            <td th:text="${detalleCompra.cantidad}"></td>
+            <td th:text="${detalleCompra.preciocompra}"></td>
+          </tr>
+        </th:block>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
 
 <!-- ##### ACA DAME LA TABLA ##### -->
 
