@@ -1,6 +1,7 @@
 package com.example.webproject.controller2;
 
 
+import com.example.webproject.dao.ProductDao;
 import com.example.webproject.entity.*;
 import com.example.webproject.repository.PlantasRepository;
 import com.example.webproject.repository.PublicacionRepository;
@@ -30,6 +31,9 @@ public class ClientController {
     @Autowired
     PublicacionRepository publicacionRepository;
 
+    @Autowired
+    ProductDao productDao;
+
     List<Compra> listacompra =new ArrayList<>();
     List<Detallecompra> listadetallecompra=new ArrayList<>();
     int item=0;
@@ -37,6 +41,12 @@ public class ClientController {
     int numplantas=0;
 
     static int contador=0;
+
+    @GetMapping({"/list", "", "/"})
+    public String listarProductos(Model model) {
+        model.addAttribute("listaProductos", productDao.listarProductos());
+        return "user/list";
+    }
 
     @GetMapping("/index")
     public String indice(Model model){
