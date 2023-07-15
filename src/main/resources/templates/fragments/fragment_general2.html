@@ -13,7 +13,7 @@
   <!-- Favicon -->
   <link rel="icon" th:href="@{/img/core-img/favicon.ico}">
 
-  <!-- Core Stylesheet -->
+  <!-- Core Stylesheet-->
   <link rel="stylesheet" th:href="@{style.css}">
 
 </head>
@@ -38,13 +38,6 @@
           <!-- Menu -->
           <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
-            <!-- Nav Brand
-            <a th:href="@{index}" class="nav-brand"><img th:src="@{/img/core-img/logo.png}" alt=""></a> -->
-
-            <!-- Navbar Toggler
-            <div class="classy-navbar-toggler">
-              <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div> -->
 
             <!-- Menu -->
             <div class="classy-menu">
@@ -54,20 +47,19 @@
                 <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
               </div> -->
 
-              <!-- Navbar Start -->
+              <!---->
               <div class="classynav">
                 <ul>
-                  <li><a th:href="@{index_cli}">Home</a></li>
+                  <li><a th:href="@{index}">Home</a></li>
 
-                  <li><a th:href="@{about_cli}">About</a></li>
-                  <!-- PAGES-->
-                  <!--  -->
-                  <li><a th:href="@{shop_cli}">Comprar</a></li>
-                  <li><a th:href="@{'publicaciones_cli'}">Publicaciones</a></li>
-                  <li><a th:href="@{contact_cli}">Contactenos</a></li>
+                  <li><a th:href="@{about}">About</a></li>
+
+                  <li><a th:href="@{shop}">Comprar</a></li>
+                  <li><a th:href="@{'publicaciones'}">Publicaciones</a></li>
+                  <li><a th:href="@{contact}">Contactenos</a></li>
                   <li>
                     <div class="cart">
-                      <a th:href="@{'carrito_cli'}">
+                      <a th:href="@{'carrito'}">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span>Cart
                           <span class="cart-quantity"
@@ -85,33 +77,19 @@
 
                 </ul>
 
-                <!-- Search Icon
-                <div id="searchIcon">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </div>
-                -->
               </div>
-              <!-- Navbar End -->
             </div>
           </nav>
 
-          <!-- Search Form
-          <div class="search-form">
-            <form action="#" method="get">
-              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
-              <button type="submit" class="d-none"></button>
-            </form>
+          <!-- Search Form-->
 
-            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
-          </div>
-          -->
         </div>
       </div>
     </div>
   </header>
 
-  <footer class="footer-area bg-img"  th:style="'background-image: url(' + @{/img/bg-img/3.jpg} + ');'"
-          th:fragment="footer">
+  <footer class="footer-area bg-img" th:fragment="footer" style="background-image: url(../img/bg-img/3.jpg);">
+
     <!-- Main Footer Area -->
     <div class="main-footer-area">
       <div class="container">
@@ -130,60 +108,6 @@
             </div>
           </div>
 
-          <!-- Single Footer Widget
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-footer-widget">
-              <div class="widget-title">
-                <h5>QUICK LINK</h5>
-              </div>
-              <nav class="widget-nav">
-                <ul>
-                  <li><a href="#">Purchase</a></li>
-                  <li><a href="#">FAQs</a></li>
-                  <li><a href="#">Payment</a></li>
-                  <li><a href="#">News</a></li>
-                  <li><a href="#">Return</a></li>
-                  <li><a href="#">Advertise</a></li>
-                  <li><a href="#">Shipping</a></li>
-                  <li><a href="#">Career</a></li>
-                  <li><a href="#">Orders</a></li>
-                  <li><a href="#">Policities</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div> -->
-
-          <!-- Single Footer Widget
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-footer-widget">
-              <div class="widget-title">
-                <h5>BEST SELLER</h5>
-              </div>
-
-              <div class="single-best-seller-product d-flex align-items-center">
-                <div class="product-thumbnail">
-                  <a href="shop-details.html"><img th:src="@{/img/bg-img/4.jpg}" alt=""></a>
-                </div>
-                <div class="product-info">
-                  <a href="shop-details.html">Cactus Flower</a>
-                  <p>$10.99</p>
-                </div>
-              </div>
-
-
-              <div class="single-best-seller-product d-flex align-items-center">
-                <div class="product-thumbnail">
-                  <a href="shop-details.html"><img th:src="@{/img/bg-img/5.jpg}" alt=""></a>
-                </div>
-                <div class="product-info">
-                  <a href="shop-details.html">Tulip Flower</a>
-                  <p>$11.99</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          -->
           <!-- Single Footer Widget -->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="single-footer-widget">
@@ -223,19 +147,6 @@
             </div>
           </div>
           <!-- Footer Nav
-          <div class="col-12 col-md-6">
-            <div class="footer-nav">
-              <nav>
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Service</a></li>
-                  <li><a href="#">Portfolio</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
           </div> -->
         </div>
       </div>
@@ -246,7 +157,7 @@
     <!-- jQuery-2.2.4 js -->
     <script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
     <!-- Popper js -->
-    <script th:src="@{/js/bootstrap/popper.min.js/}"></script>
+    <script th:src="@{/js/bootstrap/popper.min.js}"></script>
     <!-- Bootstrap js -->
     <script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
     <!-- All Plugins js -->

@@ -5,19 +5,20 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+<!-- Preloader -->
+ <div th:replace="fragments/fragment_general2 :: preloader"></div>
 
-    <!-- ##### Header Area Start ##### -->
-    <header th:replace="fragments/fragment_general2 :: header-area"></header>
-    <!-- ##### Header Area End ##### -->
+<!-- ##### Header Area Start ##### -->
+ <header th:replace="fragments/fragment_general2 :: header-area"></header>
+<!-- Resto del código... -->
 
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../img/bg-img/24.jpg);">
             <h2>ABOUT US</h2>
         </div>
+
 
         <div class="container">
             <div class="row">
@@ -100,7 +101,7 @@
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img src="img/core-img/b1.png" alt="">
+                                    <img th:src="@{/img/core-img/b1.png}" alt="" src="">
                                     <h5>Quality Products</h5>
                                     <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
                                 </div>
@@ -109,7 +110,7 @@
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img src="img/core-img/b2.png" alt="">
+                                    <img th:src="@{/img/core-img/b2.png}" alt="" src="">
                                     <h5>Perfect Service</h5>
                                     <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
                                 </div>
@@ -118,7 +119,7 @@
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img src="img/core-img/b3.png" alt="">
+                                    <img th:src="@{/img/core-img/b3.png}" alt="" src="">
                                     <h5>100% Natural</h5>
                                     <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
                                 </div>
@@ -127,7 +128,7 @@
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img src="img/core-img/b4.png" alt="">
+                                    <img th:src="@{/img/core-img/b4.png}" alt="" src="">
                                     <h5>Environmentally friendly</h5>
                                     <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
                                 </div>
@@ -169,7 +170,7 @@
                         <div class="single-service-area d-flex align-items-center">
                             <!-- Icon -->
                             <div class="service-icon mr-30">
-                                <img src="img/core-img/s1.png" alt="">
+                                <img th:src="@{/img/core-img/s1.png}" alt="" src="">
                             </div>
                             <!-- Content -->
                             <div class="service-content">
@@ -182,7 +183,7 @@
                         <div class="single-service-area d-flex align-items-center">
                             <!-- Icon -->
                             <div class="service-icon mr-30">
-                                <img src="img/core-img/s2.png" alt="">
+                                <img th:src="@{/img/core-img/s2.png}" alt="" src="">
                             </div>
                             <!-- Content -->
                             <div class="service-content">
@@ -195,7 +196,7 @@
                         <div class="single-service-area d-flex align-items-center">
                             <!-- Icon -->
                             <div class="service-icon mr-30">
-                                <img src="img/core-img/s3.png" alt="">
+                                <img th:src="@{/img/core-img/s3.png}" alt="" src="">
                             </div>
                             <!-- Content -->
                             <div class="service-content">
@@ -209,7 +210,7 @@
 
                 <div class="col-12 col-lg-6">
                     <div class="alazea-video-area bg-overlay mb-100">
-                        <img src="img/bg-img/23.jpg" alt="">
+                        <img th:src="@{/img/bg-img/23.jpg}" alt="">
                         <a href="http://www.youtube.com/watch?v=7HKoqNJtMTQ" class="video-icon">
                             <i class="fa fa-play" aria-hidden="true"></i>
                         </a>
@@ -222,12 +223,11 @@
 
     <!-- ##### Team Area End ##### -->
 
-    <!-- ##### Footer Area Start ##### -->
+    <!-- ##### Footer Area Start #####-->
     <footer th:replace="fragments/fragment_general2 :: footer"></footer>
-    <!-- ##### Footer Area End ##### -->
 
-    <!-- ##### All Javascript Files ##### -->
     <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+
 </body>
 
 </html>

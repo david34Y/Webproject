@@ -3,8 +3,7 @@ package com.example.webproject.controller2;
 
 import com.example.webproject.dao.ProductDao;
 import com.example.webproject.entity.*;
-import com.example.webproject.repository.PlantasRepository;
-import com.example.webproject.repository.PublicacionRepository;
+import com.example.webproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +32,21 @@ public class ClientController {
     PublicacionRepository publicacionRepository;
 
     @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    CompraRepository compraRepository;
+
+    @Autowired
+    DetallecompraRepository detallecompraRepository;
+
+    @Autowired
+    RolRepository rolRepository;
+
+    @Autowired
+    ConsultaRepository consultaRepository;
+
+    @Autowired
     ProductDao productDao;
 
     List<Compra> listacompra =new ArrayList<>();
@@ -40,25 +55,20 @@ public class ClientController {
     double totalPagar;
     int numplantas=0;
 
-    static int contador=0;
+    static int contador2 =0;
 
-    @GetMapping({"/list", "", "/"})
-    public String listarProductos(Model model) {
-        model.addAttribute("listaProductos", productDao.listarProductos());
-        return "user/list";
-    }
 
     @GetMapping("/index")
     public String indice(Model model){
 
-        model.addAttribute("contador",contador);
-        return "index2";
+        model.addAttribute("contador", contador2);
+        return "cliente/index";
     }
 
     @GetMapping("/about")
     public String acercade(Model model){
-        model.addAttribute("contador",contador);
-        return "user/about";
+        model.addAttribute("contador", contador2);
+        return "cliente/about";
     }
 
     @GetMapping(value="/shop")
@@ -66,13 +76,13 @@ public class ClientController {
 
         model.addAttribute("productList", plantasRepository.plantas());
 
-        model.addAttribute("contador",contador);
+        model.addAttribute("contador", contador2);
         if(plantasRepository.plantas().get(0).getNombre().isEmpty()){
             System.out.println("FFFFFFFFF");
         }
         System.out.println(plantasRepository.plantas().get(0).getNombre());
 
-        return "user/shop";
+        return "cliente/shop";
     }
 
     //Detalle por planta
@@ -83,17 +93,17 @@ public class ClientController {
             List<Plantas> planta1=plantasRepository.findplants(Integer.parseInt(id));
             model.addAttribute("idplantas",planta1.get(0).getIdplantas());
             model.addAttribute("planta",planta1.get(0));
-            model.addAttribute("contador",contador);
+            model.addAttribute("contador", contador2);
             return "shop-details";
         }
 
-        return "user/shop-details";
+        return "cliente/shop-details";
     }
 
     //---------------------PUBLICACIONES-----------------------------------
     @GetMapping("/publicaciones")
     public String blog(Model model){
-        model.addAttribute("contador",contador);
+        model.addAttribute("contador", contador2);
         List<Publicacion> publicaciones=publicacionRepository.publicaciones();
         for(Publicacion publicacion:publicaciones){
             System.out.println(publicacion.getResumen());
@@ -102,14 +112,32 @@ public class ClientController {
         }
         model.addAttribute("publicaciones",publicaciones);
 
-        return "user/blog";
+        return "cliente/blog";
+    }
+
+    @GetMapping("/imagen2/{id}")
+    public ResponseEntity<byte[]> mostrarImagen(@PathVariable("id") int id){
+        Optional<Publicacion> opt= publicacionRepository.findById(id);
+        if(opt.isPresent()){
+            Publicacion p= opt.get();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+            byte[] imagenComoBytes=p.getImagenpubli();
+            HttpHeaders httpHeaders=new HttpHeaders();
+            httpHeaders.setContentType(MediaType.parseMediaType(p.getImagencontenttypepubli()));
+            return new ResponseEntity<>(
+                    imagenComoBytes,
+                    httpHeaders,
+                    HttpStatus.OK);
+        }else{
+            return null;
+        }
     }
 
 
     @GetMapping("/single_post")
     public String postunico(Model model, @RequestParam("id") String id){
         System.out.println(id);
-        model.addAttribute("contador",contador);
+        model.addAttribute("contador", contador2);
         Optional<Publicacion> opt= publicacionRepository.findById(Integer.parseInt(id));
         if(opt.isPresent()) {
             List<Publicacion> publicacion=publicacionRepository.findpubli(Integer.parseInt(id));
@@ -119,18 +147,18 @@ public class ClientController {
                 System.out.println(publicacion1.getTitulo());
             }
             model.addAttribute("publicacion",publicacion.get(0));
-            model.addAttribute("contador",contador);
+            model.addAttribute("contador", contador2);
             return "single-post";
         }
-        return "user/single-post";
+        return "cliente/single-post";
     }
 
     //--------------------CONTACTO------------------------
 
     @GetMapping("/contact")
     public String contacto(@ModelAttribute("consultante") Consulta consultante, Model model){
-        model.addAttribute("contador",contador);
-        return "user/contact";
+        model.addAttribute("contador", contador2);
+        return "cliente/contact";
     }
 
     //---------------------------------CARRITO---------------------------------------------------
@@ -153,7 +181,7 @@ public class ClientController {
                     "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
         }*/
         model.addAttribute("contador",listadetallecompra.size());
-        return "user/checkout";
+        return "cliente/checkout";
 
     }
 
@@ -184,8 +212,8 @@ public class ClientController {
                 detallecompra.setPreciocompra(numplantas*p.getPrecio());
                 listadetallecompra.add(detallecompra);
                 model.addAttribute("productList", plantasRepository.plantas());
-                contador=listadetallecompra.size();
-                model.addAttribute("contador", contador);
+                contador2 =listadetallecompra.size();
+                model.addAttribute("contador", contador2);
                 return "shop";
             } else {
                 for(Detallecompra compra:listadetallecompra){
@@ -195,8 +223,8 @@ public class ClientController {
                         compra.setCantidad(numplantas);
                         compra.setPreciocompra(numplantas * p.getPrecio());
                         model.addAttribute("productList", plantasRepository.plantas());
-                        contador=listadetallecompra.size();
-                        model.addAttribute("contador", contador);
+                        contador2 =listadetallecompra.size();
+                        model.addAttribute("contador", contador2);
                         return "shop";
                     }
                 }
@@ -213,12 +241,12 @@ public class ClientController {
                 detallecompra.setPreciocompra(numplantas*p.getPrecio());
                 listadetallecompra.add(detallecompra);
                 model.addAttribute("productList", plantasRepository.plantas());
-                contador=listadetallecompra.size();
-                model.addAttribute("contador", contador);
+                contador2 =listadetallecompra.size();
+                model.addAttribute("contador", contador2);
                 return "shop";
             }
         }
-        return "user/shop";
+        return "cliente/shop";
 
     }
 
@@ -246,9 +274,9 @@ public class ClientController {
                 compra.setMonto(numplantas * p.getPrecio());
                 listacompra.add(compra);
                 model.addAttribute("productList", plantasRepository.plantas());
-                contador=listacompra.size();
-                model.addAttribute("contador", contador);
-                return "shop";
+                contador2 =listacompra.size();
+                model.addAttribute("contador", contador2);
+                return "cliente/shop";
             } else {
                 for(Compra compra:listacompra){
                     if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
@@ -257,9 +285,9 @@ public class ClientController {
                         compra.setNumplantas(numplantas);
                         compra.setMonto(numplantas * p.getPrecio());
                         model.addAttribute("productList", plantasRepository.plantas());
-                        contador=listacompra.size();
-                        model.addAttribute("contador", contador);
-                        return "shop";
+                        contador2 =listacompra.size();
+                        model.addAttribute("contador", contador2);
+                        return "cliente/shop";
                     }
                 }
                 numplantas = numplantas + 1;
@@ -271,13 +299,13 @@ public class ClientController {
                 compra.setMonto(numplantas * p.getPrecio());
                 listacompra.add(compra);
                 model.addAttribute("productList", plantasRepository.plantas());
-                contador=listacompra.size();
-                model.addAttribute("contador", contador);
-                return "shop";
+                contador2 =listacompra.size();
+                model.addAttribute("contador", contador2);
+                return "cliente/shop";
             }
 
         }
-        return "user/shop";
+        return "cliente/shop";
 
     }
 
@@ -291,8 +319,8 @@ public class ClientController {
 
         if(listadetallecompra.size()==1){
             listadetallecompra.remove(0);
-            contador=0;
-            return "redirect:/shop";
+            contador2 =0;
+            return "redirect:/cliente/shop";
         }
         System.out.println("IDD" + id);
         int id1=Integer.parseInt(id);
@@ -300,37 +328,19 @@ public class ClientController {
         for (Detallecompra compra:listadetallecompra) {
             if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)) {
                 listadetallecompra.remove(i);
-                contador=0;
-                return "redirect:/carrito";
+                contador2 =0;
+                return "redirect:/cliente/shop";
             }
             i=i+1;
         }
 
 
-        return "redirect:/carrito";
+        return "redirect:/cliente/shop";
 
     }
 
     //------------------------------------------------------------
     //archivo
-    @GetMapping("/imagen/{id}")
-    public ResponseEntity<byte[]> mostrarImagen(@PathVariable ("id") int id){
-        Optional<Plantas> opt= plantasRepository.findById(id);
-        if(opt.isPresent()){
-            Plantas p= opt.get();
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
-            byte[] imagenComoBytes=p.getImagen();
-            byte[] imagenComoBytes2=p.getImagen2();
-            HttpHeaders httpHeaders=new HttpHeaders();
-            httpHeaders.setContentType(MediaType.parseMediaType(p.getImagencontenttype()));
-            return new ResponseEntity<>(
-                    imagenComoBytes,
-                    httpHeaders,
-                    HttpStatus.OK);
-        }else{
-            return null;
-        }
-    }
 
     @GetMapping("/imagen22/{id}")
     public ResponseEntity<byte[]> mostrarImagen2(@PathVariable ("id") int id){
@@ -366,5 +376,25 @@ public class ClientController {
         }else{
             return null;
         }
+    }
+    @GetMapping("/perfil")
+    public String perfil_cliente(Model model, Principal principal) {
+        /*
+        String usuarioCorreo = principal.getName(); // Obtiene el correo del usuario logueado
+        Usuario usuario = usuarioRepository.findUsuarioByCorreo(usuarioCorreo);
+
+         */
+        //reemplaza el 4 con el id del usuario
+        List<Compra> compras = compraRepository.findComprasByUsuarioId(4);
+
+        List<List<Detallecompra>> detallesCompras = new ArrayList<>();
+        for (Compra compra : compras) {
+            List<Detallecompra> detallesCompra = detallecompraRepository.findByComprasID(compra.getIdcompra());
+            detallesCompras.add(detallesCompra);
+        }
+        model.addAttribute("detallesCompras", detallesCompras);
+        //model.addAttribute("usuario", usuario);
+
+        return "cliente/perfil";
     }
 }
