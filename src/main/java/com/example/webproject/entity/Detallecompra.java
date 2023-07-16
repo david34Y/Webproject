@@ -60,6 +60,7 @@ public class Detallecompra {
     }
 
     public void setCompra(Compra compra) {
-        this.compra = compra;}
+        this.compra = compra;
+    }
 
 }
