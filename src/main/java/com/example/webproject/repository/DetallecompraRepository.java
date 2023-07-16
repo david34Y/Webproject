@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Repository
@@ -28,6 +29,12 @@ public interface DetallecompraRepository extends JpaRepository<Detallecompra, In
             "WHERE c.estado = 'proceso';",nativeQuery = true)
     List<Detallecompra> findByCompraCompletada();
 
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO detallecompra ( `cantidad`, `preciocompra`, `plantas_idplantas`, `compra_idcompra`) " +
+            "VALUES (?1, ?2, ?3, ?4);", nativeQuery = true)
+    void insertDetalleCompra(int cantidad, double preciocompra, int plantas_idplantas, int compra_idcompra );
 
 
 
