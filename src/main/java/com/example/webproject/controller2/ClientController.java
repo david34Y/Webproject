@@ -270,62 +270,6 @@ public class ClientController {
 
 
 
-    //añadir carrito anterior
-    @GetMapping("/add2")
-    public String add(Model model,@RequestParam("id") String id){
-        Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
-        numplantas=0;
-        int find=0;
-        int findid;
-
-        if(opt.isPresent()) {
-            //obtengo la planta
-            Plantas p = opt.get();
-            //obtengo planta
-            if(listacompra.size()==0){
-                numplantas = numplantas + 1;
-                Compra compra = new Compra();
-                compra.setIdcompra(item);
-                compra.setNumplantas(numplantas);
-                compra.setIdcompra(p.getIdplantas());
-                compra.setPlantas(p);
-                compra.setMonto(numplantas * p.getPrecio());
-                listacompra.add(compra);
-                model.addAttribute("productList", plantasRepository.plantas());
-                contador2 =listacompra.size();
-                model.addAttribute("contador", contador2);
-                return "cliente/shop";
-            } else {
-                for(Compra compra:listacompra){
-                    if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
-                        find = 1;
-                        numplantas= compra.getNumplantas()+1;
-                        compra.setNumplantas(numplantas);
-                        compra.setMonto(numplantas * p.getPrecio());
-                        model.addAttribute("productList", plantasRepository.plantas());
-                        contador2 =listacompra.size();
-                        model.addAttribute("contador", contador2);
-                        return "cliente/shop";
-                    }
-                }
-                numplantas = numplantas + 1;
-                Compra compra = new Compra();
-                compra.setIdcompra(item);
-                compra.setNumplantas(numplantas);
-                compra.setIdcompra(p.getIdplantas());
-                compra.setPlantas(p);
-                compra.setMonto(numplantas * p.getPrecio());
-                listacompra.add(compra);
-                model.addAttribute("productList", plantasRepository.plantas());
-                contador2 =listacompra.size();
-                model.addAttribute("contador", contador2);
-                return "cliente/shop";
-            }
-
-        }
-        return "cliente/shop";
-
-    }
 
     @GetMapping(value="/delete")
     public String del(Model model,@RequestParam("id") String id){

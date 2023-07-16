@@ -16,7 +16,7 @@ public class LoginController {
     @Autowired
     UserDao userDao;
 
-    @GetMapping("/")
+
     public String login(Model model) {
         return "login";
     }
@@ -32,10 +32,10 @@ public class LoginController {
         try {
             String loginUuid = userDao.login(userLoginDto);
             System.out.println("uuid: " + loginUuid);
-            return "redirect:/cliente/index";
+            return "redirect:/home";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            return "redirect:/login/";
+            return "redirect:/login";
         }
 
     }

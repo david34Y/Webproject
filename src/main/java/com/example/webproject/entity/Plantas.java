@@ -90,6 +90,7 @@ public class Plantas {
 
 
 
+
     public byte[] getImagen() {
         return imagen;
     }

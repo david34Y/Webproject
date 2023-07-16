@@ -3,10 +3,7 @@ package com.example.webproject.controller;
 import com.example.webproject.entity.Compra;
 import com.example.webproject.entity.Detallecompra;
 import com.example.webproject.entity.Plantas;
-import com.example.webproject.repository.CompraRepository;
-import com.example.webproject.repository.DetallecompraRepository;
-import com.example.webproject.repository.PlantasRepository;
-import com.example.webproject.repository.UsuarioRepository;
+import com.example.webproject.repository.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -155,8 +152,45 @@ public class ManagerController {
         }
     }
 
+    @GetMapping("/image1/{id}")
+    public ResponseEntity<byte[]> mostrarImagen2(@PathVariable ("id") int id){
+        Optional<Plantas> opt= plantasRepository.findById(id);
+        if(opt.isPresent()){
+            Plantas p= opt.get();
+            //System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+            byte[] imagenComoBytes2=p.getImagen2();
+            HttpHeaders httpHeaders=new HttpHeaders();
+            httpHeaders.setContentType(MediaType.parseMediaType(p.getImagencontenttype2()));
+            return new ResponseEntity<>(
+                    imagenComoBytes2,
+                    httpHeaders,
+                    HttpStatus.OK);
+        }else{
+            return null;
+        }
+    }
+
+    @GetMapping("/image2/{id}")
+    public ResponseEntity<byte[]> mostrarImagen3(@PathVariable ("id") int id){
+        Optional<Plantas> opt= plantasRepository.findById(id);
+        if(opt.isPresent()){
+            Plantas p= opt.get();
+            //System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+            byte[] imagenComoBytes3=p.getImagen3();
+            HttpHeaders httpHeaders=new HttpHeaders();
+            httpHeaders.setContentType(MediaType.parseMediaType(p.getImagencontenttype3()));
+            return new ResponseEntity<>(
+                    imagenComoBytes3,
+                    httpHeaders,
+                    HttpStatus.OK);
+        }else{
+            return null;
+        }
+    }
+
     @Autowired
     CompraRepository compraRepository;
+
 
     @GetMapping(value = "/achats")
     public String listarCompras(Model model){

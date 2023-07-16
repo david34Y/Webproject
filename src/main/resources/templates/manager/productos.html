@@ -55,11 +55,11 @@
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>NOMBRE</th>
-                              <th></th>
-                              <th>RECOMENDACIONES</th>
-                              <th>STOCK</th>
-                              <th>PRECIO</th>
+                              <th>Nombre</th>
+                              <th>Foto de perfil</th>
+                              <th>Precio</th>
+                              <th>Stock</th>
+                              <th>Ambiente</th>
                               <th></th>
                               <th></th>
                               <th></th>
@@ -67,13 +67,14 @@
                           </thead>
                           <tbody>
                             <tr th:each="product, info :${productList}">
-                              <th scope="row" th:text="${info.index + 1}">1</th>
+                              <th th:text="${info.index + 1}">1</th>
                               <td th:text="${product.nombre}">Otto</td>
                               <td><img th:src="@{|image/${product.idplantas}|}"
-                                       width="120" height="100"></td>
-                              <td th:text="${product.recomendacion}">Otto</td>
+                                       width="100px" height="100px"></td>
+                              <td th:text="${'S/. '+product.precio}"></td>
                               <td th:text="${product.stock}">Otto</td>
-                              <td th:text="${'S/. ' + product.precio}">@mdo</td>
+                              <td th:text="${product.recomendacion}">Otto</td>
+
                               <td>
                                 <a class="btn btn-warning"
                                    th:href="@{'/manager/edit?id=' + ${product.idplantas}}">Editar</a>
@@ -105,7 +106,7 @@
                               </td>
                               <td>
                                 <button class="btn btn-success" data-toggle="modal" th:data-target="'#exampleModal' + ${info.index}">
-                                  Ver +
+                                  Ver detalles
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade bd-example-modal-lg" th:id="'exampleModal' + ${info.index}" tabindex="-1" role="dialog"
@@ -119,10 +120,14 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        <!--img th:src="@{|imagen/${product.idplantas}|}"
-                                                 width="200" height="180"-->
-                                        <p th:text="${product.precio}"></p>
-                                        <p th:text="${product.stock}"></p>
+                                        <div class="d-flex justify-content-center">
+                                          <div class="mr-3">
+                                            <img th:if="${product.idplantas != null}" th:src="@{|image1/${product.idplantas}|}" width="300px" height="300px" alt="Image 1">
+                                          </div>
+                                          <div>
+                                            <img th:if="${product.idplantas != null}" th:src="@{|image2/${product.idplantas}|}" width="300px" height="300px" alt="Image 2">
+                                          </div>
+                                        </div>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

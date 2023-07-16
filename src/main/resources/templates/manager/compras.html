@@ -52,11 +52,10 @@
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>FECHA</th>
-                              <th>CLIENTE</th>
-                              <th>ITEMS</th>
-                              <th>TOTAL</th>
-                              <th>ESTADO</th>
+                              <th>Cliente</th>
+                              <th>Items</th>
+                              <th>Total</th>
+                              <th>Estado</th>
                               <th></th>
                               <th></th>
                               <th></th>
@@ -65,13 +64,12 @@
                           <tbody >
                             <tr th:each="report, info :${reportList}">
                               <th scope="row" th:text="${info.index + 1}">1</th>
-                              <td>17/02/2001</td>
-                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellido}">Otto</td>
+                              <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellidos}">Otto</td>
                               <td th:text="${report.compra.numplantas}">@mdo</td>
                               <td th:text="${'S/. ' +report.compra.monto}">@mdo</td>
                               <td th:text="${report.compra.estado}"></td>
-                              <td><a th:href="@{'/manager/details?id='+ ${report.compra.getIdcompra()}}" class="btn btn-light">Ver detalles</a></td>
-                              <td><a th:if="${report.compra.estado=='Pendiente'}" th:href="@{'/manager/state?id='+ ${report.compra.idcompra}}" class="btn btn-info">Cambiar</a></td>
+                              <td><a th:href="@{'/manager/details?id='+ ${report.compra.idcompra}}" class="btn btn-light">Ver detalles</a></td>
+                              <td><a  th:href="@{'/manager/state?id='+ ${report.compra.idcompra}}" class="btn btn-info">Cambiar</a></td>
                               <td><button class="btn btn-primary" >Ver Voucher</button></td>
                             </tr>
                           </tbody>

@@ -12,7 +12,7 @@ public class Compra {
 
     private String estado;
 
-    private int numplantas;
+    private int num_plantas;
     private double monto;
 
     public double getMonto() {
@@ -26,8 +26,6 @@ public class Compra {
     @ManyToOne
     private Usuario usuario;
 
-    @ManyToOne
-    private Plantas plantas;
 
     public String getEstado() {
         return estado;
@@ -43,11 +41,14 @@ public class Compra {
 
 
     // Constructor con todos los campos
-    public Compra(String estado, int numPlantas, Usuario usuario, Plantas plantas) {
+
+
+    public Compra(int idcompra, String estado, int num_plantas, double monto, Usuario usuario) {
+        this.idcompra = idcompra;
         this.estado = estado;
-        this.numplantas = numPlantas;
+        this.num_plantas = num_plantas;
+        this.monto = monto;
         this.usuario = usuario;
-        this.plantas = plantas;
     }
 
     // Getters y Setters
@@ -62,11 +63,11 @@ public class Compra {
 
 
     public int getNumplantas() {
-        return numplantas;
+        return num_plantas;
     }
 
     public void setNumplantas(int numplantas) {
-        this.numplantas = numplantas;
+        this.num_plantas = numplantas;
     }
 
     public Usuario getUsuario() {
@@ -77,18 +78,7 @@ public class Compra {
         this.usuario = usuario;
     }
 
-    public Plantas getPlantas() {
-        return plantas;
-    }
 
-    public void setPlantas(Plantas plantas) {
-        this.plantas = plantas;
-    }
 
-    // Método toString para imprimir el objeto
-    @Override
-    public String toString() {
-        return "Compra [idCarrito=" + idcompra + ", estado=" + estado + ", numPlantas=" + numplantas + ", usuario=" + usuario + ", plantas=" + plantas + "]";
-    }
 
 }
