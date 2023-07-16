@@ -1,68 +1,24 @@
 package com.example.webproject.entity;
-
 import jakarta.persistence.*;
-
-import java.util.Objects;
 
 @Entity
 @Table(name="detallecompra")
 public class Detallecompra {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "iddetallecompra")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int iddetallecompra;
 
-    @Basic
-    @Column(name = "cantidad")
     private int cantidad;
-    @Basic
-    @Column(name = "preciocompra")
-    private Double preciocompra;
+
+    private double preciocompra;
+
     @ManyToOne
-    @JoinColumn(name = "plantas_idplantas")
+    @JoinColumn(name = "PlantasID")
     private Plantas plantas;
+
     @ManyToOne
-    @JoinColumn(name = "compra_idcompra")
+    @JoinColumn(name = "CompraID")
     private Compra compra;
 
-
-    public int getIddetallecompra() {
-        return iddetallecompra;
-    }
-
-    public void setIddetallecompra(int iddetallecompra) {
-        this.iddetallecompra = iddetallecompra;
-    }
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Double getPreciocompra() {
-        return preciocompra;
-    }
-
-    public void setPreciocompra(Double preciocompra) {
-        this.preciocompra = preciocompra;
-    }
-
-    public Plantas getPlantas() {
-        return plantas;
-    }
-
-    public void setPlantas(Plantas plantas) {
-        this.plantas = plantas;
-    }
-
-    public Compra getCompra() {
-        return compra;
-    }
-
-    public void setCompra(Compra compra) {
-        this.compra = compra;
-    }
 
 }
