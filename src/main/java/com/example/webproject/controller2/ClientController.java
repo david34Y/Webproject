@@ -114,7 +114,25 @@ public class ClientController {
 
         return "cliente/blog";
     }
-
+    //FUNCION PARA LAS IMAGENES DE LISTA DE PLANTAS
+    @GetMapping("/imagen/{id}")
+    public ResponseEntity<byte[]> mostrarImagenplantas(@PathVariable ("id") int id){
+        Optional<Plantas> opt= plantasRepository.findById(id);
+        if(opt.isPresent()){
+            Plantas p= opt.get();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+            byte[] imagenComoBytes=p.getImagen();
+            byte[] imagenComoBytes2=p.getImagen2();
+            HttpHeaders httpHeaders=new HttpHeaders();
+            httpHeaders.setContentType(MediaType.parseMediaType(p.getImagencontenttype()));
+            return new ResponseEntity<>(
+                    imagenComoBytes,
+                    httpHeaders,
+                    HttpStatus.OK);
+        }else{
+            return null;
+        }
+    }
     @GetMapping("/imagen2/{id}")
     public ResponseEntity<byte[]> mostrarImagen(@PathVariable("id") int id){
         Optional<Publicacion> opt= publicacionRepository.findById(id);
