@@ -2,8 +2,6 @@ package com.example.webproject.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 @Table(name="detallecompra")
 public class Detallecompra {
