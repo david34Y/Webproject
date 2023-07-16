@@ -359,4 +359,43 @@ public class ClientController {
 
         return "cliente/perfil";
     }
+
+    @GetMapping("/guardar_compra")
+    public String guardarcompra(){
+        Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
+        Usuario usuario=optionalUsuario.get();
+        //1 creo compra
+        Compra compra=new Compra();
+        List<Compra> opt= compraRepository.findAll();
+
+        List<Detallecompra> optD= detallecompraRepository.findAll();
+        //int idcompra=opt.size()+1;
+        int totalplantas=0;
+        double monto=0;
+        compra.setEstado("proceso");
+        //compra.setIdcompra(idcompra);
+        compra.setUsuario(usuario);
+        for(Detallecompra detallecompra:listadetallecompra){
+            totalplantas=totalplantas+detallecompra.getCantidad();
+            monto=monto+detallecompra.getPreciocompra();
+        }
+        compra.setNumplantas(totalplantas);
+        compra.setMonto(monto);
+        compraRepository.save(compra);
+        int iddetalle=0;
+        //añadir detalle de compra
+        for(Detallecompra detallecompra:listadetallecompra){
+            iddetalle=optD.size()+2;
+            detallecompra.setIddetallecompra(iddetalle);
+            detallecompra.setCompra(compra);
+            detallecompraRepository.insertDetalleCompra(detallecompra.getCantidad(),
+                    detallecompra.getPreciocompra(),detallecompra.getPlantas().getIdplantas(),detallecompra.getCompra().getIdcompra());
+        }
+
+        listadetallecompra.clear();
+        listacompra.clear();
+        contador2=0;
+        return "redirect:/shop";
+    }
+
 }
