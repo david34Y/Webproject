@@ -25,8 +25,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="#">Tienda</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Detalles</li>
                         </ol>
                     </nav>
@@ -82,7 +82,7 @@
                             <h4 class="price" th:text="|S/. ${planta.getPrecio()}|"></h4>
                             <div class="short_overview">
                                 <h5 th:text="|Ambientes Recomendados: ${planta.getRecomendacion()}|"></h5>
-                                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo.</h5>
+                                <h5></h5>
                             </div>
 
                             <h4 class="price" th:if="${planta.stock==0}"th:text="|Sin stock|"> </h4>
@@ -90,7 +90,7 @@
 
 
                                 <!-- Add to Cart Form -->
-                                <a  th:if="${planta.stock>0}" th:href="@{'add?id=' + ${planta.getIdplantas()}}" value="5" class="btn alazea-btn ml-15">Add to cart</a>
+                                <a  th:if="${planta.stock>0}" th:href="@{'add?id=' + ${planta.getIdplantas()}}" value="5" class="btn alazea-btn ml-15">Agregar al carrito</a>
 
 
 

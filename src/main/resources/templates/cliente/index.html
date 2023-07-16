@@ -20,17 +20,17 @@
             <!-- Single Hero Post -->
             <div class="single-hero-post bg-overlay">
                 <!-- Post Image -->
-                <div class="slide-img bg-img" style="background-image: url(../img/bg-img/1.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(img/bg-img/1.jpg);"></div>
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
-                                <h2>Plants exist in the weather and light rays that surround them</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante nec ipsum iaculis, ac iaculis ipsum porttitor. Vivamus cursus nisl lectus, id mattis nisl lobortis eu. Duis diam augue, dapibus ut dolor at, mattis maximus dolor.</p>
+                                <h2>Las plantas existen en el clima y los rayos de luz que las rodean.</h2>
+                                <p></p>
                                 <div class="welcome-btn-group">
-                                    <a href="#" class="btn alazea-btn mr-30">GET STARTED</a>
-                                    <a href="#" class="btn alazea-btn active">CONTACT US</a>
+                                    <a th:href="@{login}" class="btn alazea-btn mr-30">Comienza ahora</a>
+                                    <a th:href="@{contact}" class="btn alazea-btn active">Contáctanos</a>
                                 </div>
                             </div>
                         </div>
@@ -47,11 +47,11 @@
                         <div class="col-12">
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
-                                <h2>Plants exist in the weather and light rays that surround them</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante nec ipsum iaculis, ac iaculis ipsum porttitor. Vivamus cursus nisl lectus, id mattis nisl lobortis eu. Duis diam augue, dapibus ut dolor at, mattis maximus dolor.</p>
+                                <h2>Las plantas existen en el clima y los rayos de luz que las rodean.</h2>
+                                <p></p>
                                 <div class="welcome-btn-group">
-                                    <a href="#" class="btn alazea-btn mr-30">GET STARTED</a>
-                                    <a href="#" class="btn alazea-btn active">CONTACT US</a>
+                                    <a th:href="@{login}" class="btn alazea-btn mr-30">Comienza ahora</a>
+                                    <a th:href="@{contact}" class="btn alazea-btn active">Contáctanos</a>
                                 </div>
                             </div>
                         </div>
@@ -125,24 +125,37 @@
     </section>
     -->
     <!-- ##### Service Area End ##### -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
 
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- ##### About Area Start ##### -->
-    <section class="about-us-area section-padding-100-0">
+    <section class="about-us-area">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-5">
                     <!-- Section Heading -->
                     <div class="section-heading">
-                        <h2>ABOUT US</h2>
-                        <p>We are leading in the plants service fields.</p>
+                        <h2>ACERCA DE NOSOTROS</h2>
+                        <p>Somos líderes en los campos de servicio de las plantas.</p>
                     </div>
-                    <p>Quisque orci quam, vulputate non commodo finibus, molestie ac ante. Duis in sceleri quesem. Nulla sit amet varius nunc. Maecenas dui, tempeu ullam corper in.</p>
+                    <p>Somos Don Tulipán, empresa con más de 40 años de experiencia, dedicada al cultivo y comercialización de plantas ornamentales de interior y exterior, así como al diseño de jardines y decoración de áreas verdes tanto de edificios multifamiliares, condominios, casas, empresas y oficinas.</p>
 
                     <!-- Progress Bar Content Area -->
                     <div class="alazea-progress-bar mb-50">
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Office plants</p>
+                            <p>Plantas de oficina</p>
                             <div id="bar1" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -153,7 +166,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Field manager</p>
+                            <p>Gerente de campo</p>
                             <div id="bar2" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -164,7 +177,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Landscape design</p>
+                            <p>Diseño de exteriores</p>
                             <div id="bar3" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -175,7 +188,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Garden Care</p>
+                            <p>Cuidado del jardín</p>
                             <div id="bar4" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -192,36 +205,36 @@
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img th:src="@{/img/core-img/b1.png}" alt="" src="">
-                                    <h5>Quality Products</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <img src="img/core-img/b1.png" alt="">
+                                    <h5>Calidad de productos</h5>
+                                    <p></p>
                                 </div>
                             </div>
 
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img th:src="@{/img/core-img/b2.png}" alt="" src="">
-                                    <h5>Perfect Service</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <img src="img/core-img/b2.png" alt="">
+                                    <h5>Perfecto servicio</h5>
+                                    <p></p>
                                 </div>
                             </div>
 
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img th:src="@{/img/core-img/b3.png}" alt="" src="">
+                                    <img src="img/core-img/b3.png" alt="">
                                     <h5>100% Natural</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <p></p>
                                 </div>
                             </div>
 
                             <!-- Single Benefits Area -->
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
-                                    <img th:src="@{/img/core-img/b4.png}" alt="" src="">
-                                    <h5>Environmentally friendly</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <img src="img/core-img/b4.png" alt="">
+                                    <h5>Respetuoso del medio ambiente</h5>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
