@@ -2,6 +2,10 @@ package com.example.webproject.controller;
 
 import com.example.webproject.dao.UserDao;
 import com.example.webproject.dto.UserLoginDto;
+import com.example.webproject.entity.Usuario;
+import com.example.webproject.repository.UsuarioRepository;
+import com.google.api.Http;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,22 +25,43 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/signin")
-    public String loguinUid(@RequestParam("exampleCorreo") String email,
-                            @RequestParam("inputPassword1") String password){
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
-        UserLoginDto userLoginDto = new UserLoginDto();
-        userLoginDto.setEmail(email);
-        userLoginDto.setPassword(password);
-        userLoginDto.setReturnSecureToken(true);
+    @PostMapping("/signin")
+    public String loginObtainID(@RequestParam("exampleCorreo") String email,
+                                @RequestParam("inputPassword1") String password,
+                                HttpSession session){
+
         try {
-            String loginUuid = userDao.login(userLoginDto);
-            System.out.println("uuid: " + loginUuid);
-            return "redirect:/home";
+            Integer loginID = usuarioRepository.loginUsuario(email, password);
+            Integer rolID = usuarioRepository.loginUsuario(email, password);
+
+            System.out.println("Login ID: " + loginID);
+            Usuario usuario = usuarioRepository.findUsuarioById(loginID);
+            session.setAttribute("user", usuario);
+            if(rolID == 1){
+                System.out.println("Manager");
+                return "redirect:/manager/";
+            } else if (rolID == 2) {
+                System.out.println("Cliente");
+                return "redirect:/cliente/index";
+            } else{
+                System.out.println("Admin");
+                return "redirect:/admin/";
+            }
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            return "redirect:/login";
         }
-
+        return "redirect:/login";
     }
+
+    @GetMapping("/signout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Invalida la sesión actual
+        return "redirect:/login"; // Redirecciona al inicio de sesión
+    }
+
+
 }

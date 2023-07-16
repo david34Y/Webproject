@@ -50,9 +50,9 @@
       </div>
 
       <div class="col-12 col-md-5">
-        <h3>Nombre: <span th:text="${usuario.nombre}"></span></h3>
+        <h3>Nombre: <span th:text="${session.user.nombre}"></span></h3>
         <p>Número telefónico: <span th:text="${usuario.password}"></span></p>
-        <p>Correo: <span th:text="${usuario.correo}"></span></p>
+        <p>Correo: <span th:text="${session.user.correo}"></span></p>
         <button class="btn alazea-btn" onclick="editarPerfil()">Editar</button>
       </div>
     </div>

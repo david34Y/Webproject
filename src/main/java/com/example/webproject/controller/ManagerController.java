@@ -3,10 +3,12 @@ package com.example.webproject.controller;
 import com.example.webproject.entity.Compra;
 import com.example.webproject.entity.Detallecompra;
 import com.example.webproject.entity.Plantas;
+import com.example.webproject.entity.Usuario;
 import com.example.webproject.repository.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,10 +35,12 @@ public class ManagerController {
     DetallecompraRepository detallecompraRepository;
 
     @GetMapping(value={"/list","/",""})
-    public String listarProductos(Model model) throws JsonProcessingException {
+    public String listarProductos(Model model, HttpSession session) throws JsonProcessingException {
         model.addAttribute("productList", plantasRepository.findAll());
         // creas un objeto ObjectMapper para convertir objetos a JSON
         ObjectMapper mapper = new ObjectMapper();
+
+        Usuario usuario = (Usuario) session.getAttribute("user");
 
         // conviertes la lista de productos a JSON
         ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
@@ -44,6 +48,7 @@ public class ManagerController {
 
         // Se envia al javascript
         model.addAttribute("productListJSON",json);
+        model.addAttribute("user", usuario);
         return  "manager/productos";
     }
 

@@ -67,8 +67,8 @@
           <!-- Navbar Header-->
           <div class="navbar-header">
             <!-- Navbar Brand --><a class="navbar-brand d-none d-sm-inline-block" href="index.html">
-            <div class="brand-text d-none d-lg-inline-block"><span>Azalea </span><strong>Dashboard</strong></div>
-            <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>AD</strong></div></a>
+            <div class="brand-text d-none d-lg-inline-block"><span>Don </span><strong>Tulipán</strong></div>
+            <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>DT</strong></div></a>
             <!-- Toggle Button--><a class="menu-btn active" id="toggle-btn" href="#"><span></span><span></span><span></span></a>
           </div>
           <!-- Navbar Menu -->
@@ -79,7 +79,8 @@
                 <!--use xlink:href="#find-1"> </use-->
               </svg></a></li>
             <!-- Logout    -->
-            <li class="nav-item"><a class="nav-link text-white" href="login.html"> <span class="d-none d-sm-inline">Logout</span>
+
+            <li class="nav-item"><a class="nav-link text-white" th:href="@{/login/signout}"> <span class="d-none d-sm-inline">Logout</span>
               <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                 <use xlink:href="#security-1"> </use>
               </svg></a></li>
@@ -93,8 +94,8 @@
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center py-4 px-3"><img class="avatar shadow-0 img-fluid rounded-circle" th:src="@{/img/bg-img/13.jpg}" alt="...">
       <div class="ms-3 title">
-        <h1 class="h4 mb-2">Mark Stephen</h1>
-        <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Web Designer</p>
+        <h1 class="h4 mb-2"> <span th:text="${session.user.nombre +' '+session.user.apellidos}"></span></h1></h1>
+        <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Manager </p>
       </div>
     </div>
     <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Main</span>
@@ -123,7 +124,7 @@
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center py-4 px-3"><img class="avatar shadow-0 img-fluid rounded-circle" th:src="@{/img/bg-img/13.jpg}" alt="...">
       <div class="ms-3 title">
-        <h1 class="h4 mb-2">Mark Stephen</h1>
+        <h1 class="h4 mb-2"><span th:text="${session.user.nombre +' '+session.user.apellidos}"></h1>
         <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Web Designer</p>
       </div>
     </div>
