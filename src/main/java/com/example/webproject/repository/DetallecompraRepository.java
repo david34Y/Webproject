@@ -26,7 +26,7 @@ public interface DetallecompraRepository extends JpaRepository<Detallecompra, In
     @Query(value = "SELECT iddetallecompra, cantidad,preciocompra,plantas_idplantas,compra_idcompra\n" +
             "FROM detallecompra dc\n" +
             "JOIN compra c ON dc.compra_idcompra = c.idcompra\n" +
-            "WHERE c.estado = 'proceso';",nativeQuery = true)
+            "WHERE c.estado = 'Completa';",nativeQuery = true)
     List<Detallecompra> findByCompraCompletada();
 
 

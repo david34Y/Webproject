@@ -22,12 +22,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 bg-white">
                   <li class="breadcrumb-item">
-                    <form method="post" action="#" >
-                      <div class="input-group">
-                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
-                      </div>
-                    </form>
+
                   </li>
                 </ol>
               </nav>
@@ -54,7 +49,7 @@
                             <tr th:each="report, info :${reportList}">
                               <th scope="row" th:text="${info.index + 1}">1</th>
                               <td th:text="${report.compra.usuario.nombre + ' ' + report.compra.usuario.apellidos}">Otto</td>
-                              <td><button class="btn btn-light">Ver detalles</button></td>
+                              <td><a th:href="@{'/manager/details?id='+ ${report.compra.idcompra}}" class="btn btn-light">Ver detalles</a></td>
                               <td th:text="${'S/. ' +report.compra.monto}"></td>
                             </tr>
 

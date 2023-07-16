@@ -54,6 +54,8 @@ public class ManagerController {
 
     @PostMapping(value = "/save")
     public String guardarProducto(@RequestParam("archivo") MultipartFile file,
+                                  @RequestParam("foto1") MultipartFile file1,
+                                  @RequestParam("foto2") MultipartFile file2,
                                   RedirectAttributes attr,
                                   @ModelAttribute("plantas") Plantas plantas,
                                   BindingResult bindingResult,
@@ -61,24 +63,57 @@ public class ManagerController {
         if (bindingResult.hasErrors()){
             return "manager/productosnewFrm";
         }else{
-
+            /*
             if(file.isEmpty()){
                 model.addAttribute("msg","Debe subir un archivo");
                 return "manager/productosnewFrm";
-            }
+            }*/
 
-            String fileName = file.getOriginalFilename();
 
-            if(fileName.contains("..")){
+            if(file.getOriginalFilename().contains("..")){
                 model.addAttribute("msg","No se permiten '..' en el archivo" );
+                return "manager/productosnewFrm";
+            }
+/*
+            if(file1.isEmpty()){
+                model.addAttribute("msg","Debe subir una foto");
+                return "manager/productosnewFrm";
+            }*/
+
+
+            if(file1.getOriginalFilename().contains("..")){
+                model.addAttribute("msg","No se permiten '..' en la foto" );
+                return "manager/productosnewFrm";
+            }
+/*
+            if(file2.isEmpty()){
+                model.addAttribute("msg","Debe subir otra foto");
+                return "manager/productosnewFrm";
+            }*/
+
+
+            if(file2.getOriginalFilename().contains("..")){
+                model.addAttribute("msg","No se permiten '..' en la otra foto" );
                 return "manager/productosnewFrm";
             }
 
             try {
-                plantas.setImagen(file.getBytes());
-                plantas.setImagennombre(fileName);
-                plantas.setImagencontenttype(file.getContentType());
-                if (plantas.getIdplantas() == 0) {
+                if (!file.isEmpty()) {
+                    plantas.setImagen(file.getBytes());
+                    plantas.setImagennombre(file.getOriginalFilename());
+                    plantas.setImagencontenttype(file.getContentType());
+                }
+                if (!file1.isEmpty()) {
+                    plantas.setImagen2(file1.getBytes());
+                    plantas.setImagennombre2(file1.getOriginalFilename());
+                    plantas.setImagencontenttype2(file1.getContentType());
+                }
+                if (!file2.isEmpty()) {
+                    plantas.setImagen3(file2.getBytes());
+                    plantas.setImagennombre3(file2.getOriginalFilename());
+                    plantas.setImagencontenttype3(file2.getContentType());
+                }
+                if (plantas.getIdplantas() == null) {
                     attr.addFlashAttribute("msg", "Producto creado exitosamente");
                 }else{
                     attr.addFlashAttribute("msg1", "Producto actualizado exitosamente");

@@ -28,9 +28,8 @@
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>MANAGER</th>
-                              <th>CORREO</th>
-                              <th>NUMERO</th>
+                              <th>Manager</th>
+                              <th>Correo</th>
                               <th></th>
                               <th></th>
                             </tr>
@@ -38,9 +37,8 @@
                           <tbody>
                             <tr th:each="manager, info: ${managerList}">
                               <th scope="row" th:text="${info.index + 1}">1</th>
-                              <td th:text="${manager.nombre + ' ' + manager.apellido}">Mark</td>
+                              <td th:text="${manager.nombre + ' ' + manager.apellidos}">Mark</td>
                               <td th:text="${manager.correo}">Otto</td>
-                              <td th:text="${manager.numero}">Otto</td>
                               <td><a class="btn btn-warning"
                                      th:href="@{'/admin/edit?id=' + ${manager.idusuario}}">Editar</a></td>
                               <td> <button class="btn btn-danger" data-toggle="modal" th:data-target="'#exampleModalDelete' + ${info.index}"
@@ -61,7 +59,7 @@
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                         <a type="button" class="btn btn-danger"
-                                           th:href="@{|/manager/delete?id=${manager.idusuario}|}">Borrar</a>
+                                           th:href="@{|/admin/delete?id=${manager.idusuario}|}">Borrar</a>
                                       </div>
                                     </div>
                                   </div>

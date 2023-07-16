@@ -22,12 +22,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 bg-white">
                   <li class="breadcrumb-item">
-                    <form method="post" action="#" >
-                      <div class="input-group">
-                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
-                      </div>
-                    </form>
+
                   </li>
                 </ol>
               </nav>
@@ -70,7 +65,32 @@
                               <td th:text="${report.compra.estado}"></td>
                               <td><a th:href="@{'/manager/details?id='+ ${report.compra.idcompra}}" class="btn btn-light">Ver detalles</a></td>
                               <td><a  th:href="@{'/manager/state?id='+ ${report.compra.idcompra}}" class="btn btn-info">Cambiar</a></td>
-                              <td><button class="btn btn-primary" >Ver Voucher</button></td>
+                              <td><button class="btn btn-primary" data-toggle="modal" th:data-target="'#exampleModal' + ${info.index}">Ver Voucher</button>
+
+                              <!-- Modal -->
+                              <div class="modal fade bd-example-modal-lg" th:id="'exampleModal' + ${info.index}" tabindex="-1" role="dialog"
+                                   th:aria-labelledby="'exampleModal' + ${info.index} + 'Label'" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" th:id="'exampleModal' + ${info.index} + 'Label'" th:text="${'En estado: ' +report.compra.estado}">Modal title</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="d-flex justify-content-center">
+
+                                        <!--img th:if="${product.idplantas != null}" th:src="@{|image1/${product.idplantas}|}" width="300px" height="300px" alt="Image 1"-->
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
