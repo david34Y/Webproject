@@ -63,7 +63,7 @@
 
                                 <td class="price"><span th:text="|S/. ${product.plantas.getPrecio()}|"></span></td>
                                 <td class="total_price" th:text="|S/.${product.getPreciocompra()}|"><span></span></td>
-                                <td class="action"><a th:href="@{'/delete_cli?id=' + ${product.getIddetallecompra()}}" >
+                                <td class="action"><a th:href="@{'/cliente/delete?id=' + ${product.getIddetallecompra()}}" >
                                     <i class="icon_close"></i></a></td>
                             </tr>
                             </tbody>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="checkout-btn mt-30">
                             <!-- Cambiar el enlace <a> a un botón de tipo 'button' -->
-                            <button type="button" id="procesarCompraBtn" class="btn alazea-btn w-100">Procesar Compra</button>
+                            <button type="button" id="procesarCompraBtn" class="btn alazea-btn w-100" disabled>Procesar Compra</button>
                         </div>
                     </div>
                 </div>
@@ -122,30 +122,45 @@
     </div>
 
     <script>
-        document.getElementById('procesarCompraBtn').addEventListener('click', function() {
-            // Obtener el archivo seleccionado
-            const inputFile = document.getElementById('comprobanteInput').files[0];
+        // Obtener el campo de entrada de archivos y el botón
+        const inputFile = document.getElementById('comprobanteInput');
+        const procesarCompraBtn = document.getElementById('procesarCompraBtn');
 
-            // Crear un objeto FormData para enviar el archivo
-            const formData = new FormData();
-            formData.append('comprobante', inputFile);
+        // Agregar un evento de escucha para activar el botón cuando se selecciona un archivo
+        inputFile.addEventListener('change', function() {
+            if (inputFile.files.length > 0) {
+                procesarCompraBtn.disabled = false;
+            } else {
+                procesarCompraBtn.disabled = true;
+            }
+        });
 
-            // Enviar el archivo al servidor usando AJAX
-            fetch('/cliente/guardar_compra', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                // Manejar la respuesta del servidor si es necesario
-                // Por ejemplo, redirigir a una nueva página o mostrar un mensaje de éxito
-                window.location.href = "/cliente/index";
-            }).catch(error => {
-                // Manejar errores si es necesario
-                console.error('Error al enviar el archivo:', error);
-            });
+        // Agregar el evento de clic al botón para enviar el formulario con AJAX
+        procesarCompraBtn.addEventListener('click', function() {
+            const file = inputFile.files[0];
+
+            // Verificar que se haya seleccionado un archivo antes de enviarlo
+            if (file) {
+                const formData = new FormData();
+                formData.append('comprobante', file);
+
+                fetch('/cliente/guardar_compra', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    // Manejar la respuesta del servidor si es necesario
+                    // Por ejemplo, redirigir a una nueva página o mostrar un mensaje de éxito
+                    window.location.href = "/cliente/index";
+                }).catch(error => {
+                    // Manejar errores si es necesario
+                    console.error('Error al enviar el archivo:', error);
+                });
+            }
         });
     </script>
 
-        <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
     <footer th:replace="fragments/fragment_general2 :: footer"></footer>
     <!-- ##### Footer Area End ##### -->
 
