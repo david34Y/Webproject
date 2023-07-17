@@ -62,7 +62,7 @@ public class LoginController {
     @GetMapping("/signout")
     public String logout(HttpSession session) {
         session.invalidate(); // Invalida la sesión actual
-        return "redirect:/login"; // Redirecciona al inicio de sesión
+        return "redirect:/user/login"; // Redirecciona al inicio de sesión
     }
 
 
