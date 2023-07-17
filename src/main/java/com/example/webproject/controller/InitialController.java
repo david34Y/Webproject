@@ -83,13 +83,13 @@ public class InitialController {
 
 
 
-
+/*
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("contador",contador);
         return "login";
     }
-
+*/
 
 
     @GetMapping("/single-portfolio")

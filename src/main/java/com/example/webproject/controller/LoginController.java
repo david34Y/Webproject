@@ -20,8 +20,9 @@ public class LoginController {
     @Autowired
     UserDao userDao;
 
-
+    @GetMapping("")
     public String login(Model model) {
+        model.addAttribute("contador","0");
         return "login";
     }
 
