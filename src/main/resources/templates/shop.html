@@ -7,10 +7,10 @@
 
     <body>
         <!-- Preloader -->
-        <div th:replace="cliente/fragments/fragment_general2 :: preloader"></div>
+        <div th:replace="fragments/fragment_general :: preloader"></div>
 
         <!-- ##### Header Area Start ##### -->
-        <header th:replace="cliente/fragments/fragment_general2 :: header-area"></header>
+        <header th:replace="fragments/fragment_general :: header-area"></header>
         <!-- ##### Header Area End ##### -->
 
         <!-- ##### Breadcrumb Area Start ##### -->
@@ -62,16 +62,16 @@
                                 <div class="col-12 col-sm-6 col-lg-4" th:each="product, info : ${productList}" >
                                     <div class="single-product-area mb-50">
                                         <div class="product-img">
-                                            <a th:href="@{'/shopdetails_cli?id=' + ${product.idplantas}}">
+                                            <a th:href="@{'/user/shopdetails?id=' + ${product.idplantas}}">
                                                 <img th:src="@{|imagen/${product.idplantas}|}"
                                                      class="img-fluid" style="height: 300px;" ></a>
                                             <div class="product-meta d-flex justify-content-center">
-                                                <a th:if="${product.stock>0}" th:href="@{'/add_cli?id=' + ${product.idplantas}}" class="add-to-cart-btn">Agregar al carrito</a>
+                                                <a th:if="${product.stock>0}" th:href="@{'/user/add?id=' + ${product.idplantas}}" class="add-to-cart-btn">Agregar al carrito</a>
                                             </div>
                                         </div>
                                         <!-- Product Info -->
                                         <div class="product-info mt-15 text-center">
-                                            <a th:href="@{'/shopdetails_dli?id=' + ${product.idplantas}}">
+                                            <a th:href="@{'/user/shopdetails?id=' + ${product.idplantas}}">
                                                 <h4 th:text="${product.nombre}"></h4>
                                             </a>
                                             <div class="single-products d-flex justify-content-between align-items-center" th:if="${product.stock>0}">
@@ -101,11 +101,11 @@
         <!-- ##### Shop Area End ##### -->
 
         <!-- ##### Footer Area Start ##### -->
-        <footer th:replace="cliente/fragments/fragment_general2 :: footer"></footer>
+        <footer th:replace="fragments/fragment_general :: footer"></footer>
         <!-- ##### Footer Area End ##### -->
 
         <!-- ##### All Javascript Files ##### -->
-        <div th:replace="cliente/fragments/fragment_general2 :: jsfiles"></div>
+        <div th:replace="fragments/fragment_general :: jsfiles"></div>
     </body>
 
 </html>

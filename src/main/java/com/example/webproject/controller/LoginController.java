@@ -35,10 +35,11 @@ public class LoginController {
 
         try {
             Integer loginID = usuarioRepository.loginUsuario(email, password);
-            Integer rolID = usuarioRepository.loginUsuario(email, password);
+            Integer rolID = usuarioRepository.obtenerRolID(email, password);
 
             System.out.println("Login ID: " + loginID);
             Usuario usuario = usuarioRepository.findUsuarioById(loginID);
+            System.out.println("Rol ID: "+rolID);
             session.setAttribute("user", usuario);
             if(rolID == 1){
                 System.out.println("Manager");

@@ -353,22 +353,12 @@ public class ClientController {
     }
     @GetMapping("/perfil")
     public String perfil_cliente(Model model, Principal principal, HttpSession session) {
-        Usuario usuario=(Usuario) session.getAttribute("user");
-        /*
-        String usuarioCorreo = principal.getName(); // Obtiene el correo del usuario logueado
-        Usuario usuario = usuarioRepository.findUsuarioByCorreo(usuarioCorreo);
 
-         */
-        //reemplaza el 4 con el id del usuario
-        List<Compra> compras = compraRepository.findComprasByUsuarioId(4);
+        Usuario usuario = (Usuario) session.getAttribute("user");
 
-        List<List<Detallecompra>> detallesCompras = new ArrayList<>();
-        for (Compra compra : compras) {
-            List<Detallecompra> detallesCompra = detallecompraRepository.findByComprasID(compra.getIdcompra());
-            detallesCompras.add(detallesCompra);
-        }
-        model.addAttribute("detallesCompras", detallesCompras);
-        //model.addAttribute("usuario", usuario);
+        List<Compra> compras = compraRepository.findComprasByUsuarioId(usuario.getIdusuario());
+
+        model.addAttribute("compras", compras);
 
         return "cliente/perfil";
     }

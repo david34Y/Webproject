@@ -14,6 +14,10 @@ public interface DetallecompraRepository extends JpaRepository<Detallecompra, In
     nativeQuery = true)
     List<Detallecompra> findByPlantasID(Integer id);
 
+    @Query(value = "select * from detallecompra dc join compra co on dc.compra_idcompra = co.idcompra\n" +
+            "join usuario u on co.usuario_idusuario = u.idusuario join plantas p on dc.plantas_idplantas = p.idplantas where u.idusuario = ?1", nativeQuery = true)
+    List<Detallecompra> findByUserID(Integer id);
+
     @Query(value = "SELECT * FROM detallecompra WHERE compra_idcompra = ?1",
             nativeQuery = true)
     List<Detallecompra> findByComprasID(Integer id);
