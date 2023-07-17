@@ -39,6 +39,7 @@ public class    PlantasController {
     int numplantas=0;
 
     static int contador=0;
+    /*
     @GetMapping(value="/inicio")
     public String inicio1(Model model){
         return "listaPlantas";
@@ -184,6 +185,7 @@ public class    PlantasController {
             System.out.println("ID PLANTA "+ compra.getPlantas().getIdplantas()+
                     "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
         }*/
+    /*
         model.addAttribute("contador",listadetallecompra.size());
         return "checkout";
 
@@ -199,7 +201,7 @@ public class    PlantasController {
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
         }*/
-
+/*
         if(listadetallecompra.size()==1){
             listadetallecompra.remove(0);
             contador=0;
@@ -286,7 +288,7 @@ public class    PlantasController {
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
         }*/
-
+/*
         if(listadetallecompra.size()==1){
             listadetallecompra.remove(0);
             contador=0;
@@ -324,7 +326,7 @@ public class    PlantasController {
             System.out.println("ID PLANTA "+ compra.getPlantas().getIdplantas()+
                     "  Nombre planta "+ compra.getPlantas().getNombre()+ "  CANTIDAD:"+ compra.getNumplantas());
         }*/
-        model.addAttribute("contador",listadetallecompra.size());
+        /*model.addAttribute("contador",listadetallecompra.size());
         return "user/checkout";
 
     }
@@ -436,5 +438,5 @@ public class    PlantasController {
 
 
 
-
+*/
 }
