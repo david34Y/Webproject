@@ -286,9 +286,12 @@ public class ManagerController {
     @PostMapping("/searchProduct")
     public String buscarProductos(@RequestParam("searchField") String searchField,
                                   Model model){
-        List<Plantas> listaprod = plantasRepository.busquedaParcialTitulo(searchField);
-        model.addAttribute("productList",listaprod);
-        model.addAttribute("searchField",searchField);
+        if (searchField.equals("")){
+            model.addAttribute("productList",plantasRepository.findAll());
+        }else{
+            model.addAttribute("productList",plantasRepository.findByNombre(searchField));
+        }
+
         return "manager/productos";
     }
 
