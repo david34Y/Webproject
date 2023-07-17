@@ -78,16 +78,16 @@
                             <h5>Precio Total</h5>
                             <h5  th:text="|S/. ${total}|"></h5>
                         </div>
-                        <!--
+
                         <div class="checkout-btn mt-30">
                             <a href="#" class="btn alazea-btn w-100"
                                data-toggle="modal" data-target="#exampleModal" >Procesar Compra</a>
-                        </div> -->
-
-                        <div class="checkout-btn mt-30">
-                            <a th:href="@{'/guardar_compra'}"
-                               class="btn alazea-btn w-100">Procesar Compra</a>
                         </div>
+                        <!--
+                                                <div class="checkout-btn mt-30">
+                                                    <a th:href="@{'/guardar_compra'}"
+                                                       class="btn alazea-btn w-100">Procesar Compra</a>
+                                                </div>-->
 
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <a th:href="@{'/registro'}" type="button" class="btn btn-danger">Registro</a>
+                    <a th:href="@{'/user/registro'}" type="button" class="btn btn-light">Registro</a>
                 </div>
             </div>
         </div>

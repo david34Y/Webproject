@@ -124,35 +124,7 @@
 </div>
 <!-- End Contact Area Info -->
 
-<!-- Compras realizadas -->
-<div class="compras-section">
-  <div class="container">
-    <h3>Compras realizadas</h3>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>ID Compra</th>
-          <th>Cantidad de plantas</th>
-          <th>Estado</th>
-          <th>Monto</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Iterating over the compras and detalleCompras -->
-        <tr th:each="detalleCompra: ${compras}">
-          <td th:text="${detalleCompra.idcompra}"></td>
-          <td th:text="${detalleCompra.numplantas}"></td>
-          <td th:text="${detalleCompra.estado}"></td>
-          <td th:text="${'S/. ' + detalleCompra.monto}"></td>
-          <td><a th:href="@{'/cliente/detallesCompra?id='+ ${detalleCompra.idcompra}}" class="btn btn-light">Ver detalles</a></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+
 
 <!-- ##### ACA DAME LA TABLA ##### -->
 

@@ -93,6 +93,7 @@ public class ClientController {
     @GetMapping("/shopdetails")
     public String detallestienda(Model model,@RequestParam("id") String id, HttpSession session){
         Usuario usuario=(Usuario) session.getAttribute("user");
+        model.addAttribute("contador", contador2);
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         if(opt.isPresent()) {
             List<Plantas> planta1=plantasRepository.findplants(Integer.parseInt(id));
@@ -124,6 +125,7 @@ public class ClientController {
     //FUNCION PARA LAS IMAGENES DE LISTA DE PLANTAS
     @GetMapping("/imagen/{id}")
     public ResponseEntity<byte[]> mostrarImagenplantas(@PathVariable ("id") int id){
+
         Optional<Plantas> opt= plantasRepository.findById(id);
         if(opt.isPresent()){
             Plantas p= opt.get();
@@ -193,6 +195,7 @@ public class ClientController {
 
     @GetMapping(value="/carrito")
     public String carrito(Model model){
+        model.addAttribute("contador", contador2);
         totalPagar=0.0;
         for(int i=0;i<listadetallecompra.size();i++){
             totalPagar=totalPagar+ listadetallecompra.get(i).getPreciocompra();
@@ -215,6 +218,7 @@ public class ClientController {
     @GetMapping("/add")
     public String add2(Model model,@RequestParam("id") String id, HttpSession session){
         Usuario usuario=(Usuario) session.getAttribute("user");
+        model.addAttribute("contador", contador2);
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         numplantas=0;
         int find=0;
@@ -288,6 +292,7 @@ public class ClientController {
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
         }*/
+        model.addAttribute("contador", contador2);
         Usuario usuario=(Usuario) session.getAttribute("user");
 
         if(listadetallecompra.size()==1){
@@ -355,6 +360,7 @@ public class ClientController {
 
         Usuario usuario = (Usuario) session.getAttribute("user");
 
+
         List<Compra> compras = compraRepository.findComprasByUsuarioId(usuario.getIdusuario());
 
         model.addAttribute("compras", compras);
@@ -368,13 +374,14 @@ public class ClientController {
     public String detallesCompra(@ModelAttribute("detallecompra") Detallecompra detallecompra,
                                  @RequestParam ("id") int id,
                                  Model model){
+        model.addAttribute("contador", contador2);
         model.addAttribute("compraList",detallecompraRepository.findByComprasID(id));
         return "cliente/detalles-compra";
     }
 
     @GetMapping("/editarPerfil")
     public String editarPerfil(Model model, HttpSession session) {
-
+        model.addAttribute("contador", contador2);
         Usuario usuario = (Usuario) session.getAttribute("user");
 
         model.addAttribute("usuario", usuario);
@@ -385,9 +392,9 @@ public class ClientController {
     public String cambiarcontrasena(@RequestParam("password1") String password1,
                                     @RequestParam("password2") String password2,
                                     @RequestParam("password3") String password3,
-                                    HttpSession session) {
+                                    HttpSession session,Model model) {
         Usuario usuario = (Usuario) session.getAttribute("user");
-
+        model.addAttribute("contador", contador2);
         if (password2.equals(password1)){
             usuarioRepository.cambiarcontrasena(usuario.getIdusuario(),password3);
             System.out.println("Se cambió la contraseña");
@@ -403,6 +410,7 @@ public class ClientController {
     public String guardarCompra(@RequestParam("comprobante") MultipartFile comprobante,
                                 HttpSession session) throws IOException {
         Usuario usuario=(Usuario) session.getAttribute("user");
+
         //Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
         //Usuario usuario=optionalUsuario.get();
         //1 creo compra
