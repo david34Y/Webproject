@@ -21,4 +21,8 @@ public interface PlantasRepository extends JpaRepository<Plantas, Integer> {
 
     List<Plantas> findByNombre(String nombre);
 
+    @Query(nativeQuery = true,
+            value = "SELECT * FROM plantas i where i.nombre like '%?1%' and i.nombre is not null order by stock desc;")
+    List<Plantas> busquedaParcialTitulo(String titulo);
+
 }

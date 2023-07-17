@@ -66,10 +66,10 @@
         <div class="navbar-holder d-flex align-items-center justify-content-between w-100">
           <!-- Navbar Header-->
           <div class="navbar-header">
-            <!-- Navbar Brand --><a class="navbar-brand d-none d-sm-inline-block" href="index.html">
+
             <div class="brand-text d-none d-lg-inline-block"><span>Don </span><strong>Tulipán</strong></div>
             <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>DT</strong></div></a>
-            <!-- Toggle Button--><a class="menu-btn active" id="toggle-btn" href="#"><span></span><span></span><span></span></a>
+
           </div>
           <!-- Navbar Menu -->
           <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
@@ -80,7 +80,7 @@
               </svg></a></li>
             <!-- Logout    -->
 
-            <li class="nav-item"><a class="nav-link text-white" th:href="@{/login/signout}"> <span class="d-none d-sm-inline">Logout</span>
+            <li class="nav-item"><a class="nav-link text-white" th:href="@{/login/signout}"> <span class="d-none d-sm-inline">Cerrar Sesión</span>
               <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                 <use xlink:href="#security-1"> </use>
               </svg></a></li>
@@ -98,7 +98,7 @@
         <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Manager </p>
       </div>
     </div>
-    <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Main</span>
+    <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Menu Principal</span>
     <ul class="list-unstyled py-4">
       <li class="sidebar-item" th:classappend="${active == 'Productos'?'active':''}"><a class="sidebar-link" th:href="@{/manager/}">
         <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
@@ -128,7 +128,7 @@
         <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Web Designer</p>
       </div>
     </div>
-    <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Main</span>
+    <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Menu general</span>
     <ul class="list-unstyled py-4">
       <li class="sidebar-item" th:classappend="${active == 'Managers'?'active':''}"><a class="sidebar-link" th:href="@{/admin/}">
         <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
@@ -144,10 +144,7 @@
         <div class="col-sm-6 text-sm-start">
           <p class="mb-0">Don Tulipán &copy; 2017-2023</p>
         </div>
-        <div class="col-sm-6 text-sm-end">
-          <p class="mb-0">Design by <a href="https://bootstrapious.com/p/admin-template" class="text-white text-decoration-none">Bootstrapious</a></p>
-          <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-        </div>
+
       </div>
     </div>
   </footer>
