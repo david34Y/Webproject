@@ -245,7 +245,7 @@ public class ClientController {
                 model.addAttribute("productList", plantasRepository.plantas());
                 contador2 =listadetallecompra.size();
                 model.addAttribute("contador", contador2);
-                return "shop";
+                return "cliente/shop";
             } else {
                 for(Detallecompra compra:listadetallecompra){
                     if(compra.getPlantas().getIdplantas()==Integer.parseInt(id)){
@@ -256,7 +256,7 @@ public class ClientController {
                         model.addAttribute("productList", plantasRepository.plantas());
                         contador2 =listadetallecompra.size();
                         model.addAttribute("contador", contador2);
-                        return "shop";
+                        return "cliente/shop";
                     }
                 }
                 item=item+1;
@@ -274,7 +274,7 @@ public class ClientController {
                 model.addAttribute("productList", plantasRepository.plantas());
                 contador2 =listadetallecompra.size();
                 model.addAttribute("contador", contador2);
-                return "shop";
+                return "cliente/shop";
             }
         }else {
             return "pag_no_encontrada";

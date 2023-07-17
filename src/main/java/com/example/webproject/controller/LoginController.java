@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import static com.example.webproject.controller.PlantasController.contador;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -61,6 +64,7 @@ public class LoginController {
 
     @GetMapping("/signout")
     public String logout(HttpSession session) {
+        contador=0;
         session.invalidate(); // Invalida la sesión actual
         return "redirect:/user/login"; // Redirecciona al inicio de sesión
     }
