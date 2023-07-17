@@ -94,7 +94,7 @@ public class ClientController {
             model.addAttribute("idplantas",planta1.get(0).getIdplantas());
             model.addAttribute("planta",planta1.get(0));
             model.addAttribute("contador", contador2);
-            return "shop-details";
+            return "cliente/shop-details";
         }
 
         return "cliente/shop-details";
