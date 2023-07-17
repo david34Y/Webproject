@@ -12,10 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,9 +100,11 @@ public class ClientController {
             model.addAttribute("planta",planta1.get(0));
             model.addAttribute("contador", contador2);
             return "cliente/shop-details";
+        }else {
+            return "pag_no_encontrada";
         }
 
-        return "cliente/shop-details";
+
     }
 
     //---------------------PUBLICACIONES-----------------------------------
@@ -168,8 +174,9 @@ public class ClientController {
             model.addAttribute("publicacion",publicacion.get(0));
             model.addAttribute("contador", contador2);
             return "single-post";
+        }else {
+            return "pag_no_encontrada";
         }
-        return "cliente/single-post";
     }
 
     //--------------------CONTACTO------------------------
@@ -264,8 +271,9 @@ public class ClientController {
                 model.addAttribute("contador", contador2);
                 return "shop";
             }
+        }else {
+            return "pag_no_encontrada";
         }
-        return "cliente/shop";
 
     }
 
@@ -356,7 +364,7 @@ public class ClientController {
 
     @GetMapping("/guardar_compra")
     public String guardarcompra(){
-        Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
+        Optional<Usuario> optionalUsuario=usuarioRepository.findById(2);
         Usuario usuario=optionalUsuario.get();
         //1 creo compra
         Compra compra=new Compra();
@@ -389,7 +397,52 @@ public class ClientController {
         listadetallecompra.clear();
         listacompra.clear();
         contador2=0;
-        return "redirect:/shop";
+        return "redirect:/cliente/yape";
     }
 
+/*
+    @PostMapping(value = "/yape")
+    public String yape(@RequestParam("archivo") MultipartFile file,
+                                  RedirectAttributes attr,
+                                  BindingResult bindingResult,
+                                  Model model){
+        if (bindingResult.hasErrors()){
+            return "cliente/yape";
+        }else{
+
+            if(file.isEmpty()){
+                model.addAttribute("msg","Debe subir un archivo");
+                return "manager/productosnewFrm";
+            }
+
+
+            if(file.getOriginalFilename().contains("..")){
+                model.addAttribute("msg","No se permiten '..' en el archivo" );
+                return "manager/productosnewFrm";
+            }
+
+            try {
+                if (!file.isEmpty()) {
+                    .setImagen(file.getBytes());
+                    plantas.setImagennombre(file.getOriginalFilename());
+                    plantas.setImagencontenttype(file.getContentType());
+                }
+
+
+                if (plantas.getIdplantas() == null) {
+                    attr.addFlashAttribute("msg", "Producto creado exitosamente");
+                }else{
+                    attr.addFlashAttribute("msg1", "Producto actualizado exitosamente");
+                }
+                plantasRepository.save(plantas);
+                return "redirect:/manager/list";
+            }catch (IOException e){
+                e.printStackTrace();
+                model.addAttribute("msg","ocurrió un error al subir el archivo");
+                return "manager/productosnewFrm";
+            }
+
+        }
+
+    }*/
 }

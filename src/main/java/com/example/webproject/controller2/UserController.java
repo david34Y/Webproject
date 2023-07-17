@@ -202,8 +202,9 @@ public class UserController {
                 model.addAttribute("contador", contador);
                 return "shop";
             }
+        }else {
+            return "pag_no_encontrada";
         }
-        return "shop";
 
     }
 
@@ -282,9 +283,9 @@ public class UserController {
             model.addAttribute("planta",planta1.get(0));
             model.addAttribute("contador",contador);
             return "shop-details";
+        }else {
+            return "pag_no_encontrada";
         }
-
-        return "shop-details";
     }
 
 
@@ -320,8 +321,9 @@ public class UserController {
             model.addAttribute("publicacion",publicacion.get(0));
             model.addAttribute("contador",contador);
             return "single-post";
+        }else {
+            return "pag_no_encontrada";
         }
-        return "single-post";
     }
 
 

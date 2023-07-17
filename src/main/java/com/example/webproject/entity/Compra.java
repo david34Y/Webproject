@@ -12,7 +12,7 @@ public class Compra {
 
     private String estado;
 
-    private int num_plantas;
+    private int numplantas;
     private double monto;
 
     public double getMonto() {
@@ -46,7 +46,7 @@ public class Compra {
     public Compra(int idcompra, String estado, int num_plantas, double monto, Usuario usuario) {
         this.idcompra = idcompra;
         this.estado = estado;
-        this.num_plantas = num_plantas;
+        this.numplantas = num_plantas;
         this.monto = monto;
         this.usuario = usuario;
     }
@@ -63,11 +63,11 @@ public class Compra {
 
 
     public int getNumplantas() {
-        return num_plantas;
+        return numplantas;
     }
 
     public void setNumplantas(int numplantas) {
-        this.num_plantas = numplantas;
+        this.numplantas = numplantas;
     }
 
     public Usuario getUsuario() {
