@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment_general2 :: head(titulo='Plantas')">
+</head>
+
+<body>
+    <div th:replace="fragments/fragment_general2 :: preloader"></div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header th:replace="fragments/fragment_general2 :: header-area"></header>
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>CONTACTENOS</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Perfil</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detalles de compra</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-area-info section-padding-0-100">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table mb-0 table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th></th>
+                        <th>Cantidad</th>
+                        <th>Monto</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="detalle, info : ${compraList}">
+                        <th scope="row" th:text="${info.index + 1}">1</th>
+                        <td th:text="${detalle.plantas.nombre}">Otto</td>
+                        <td>
+                            <img th:src="@{|imagen/${detalle.plantas.idplantas}|}" width="120" height="100">
+                        </td>
+                        <td th:text="${detalle.cantidad}">@mdo</td>
+                        <td th:text="${'S/. ' + detalle.preciocompra}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container-fluid centered">
+                <div class="col-lg-12">
+                    <a class="btn btn-secondary" th:href="@{'/cliente/perfil'}">Retroceder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment_general2 :: footer"></footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <div th:replace="fragments/fragment_general2 :: jsfiles"></div>
+</body>
+</html>
