@@ -64,8 +64,7 @@ public class ClientController {
 
 
     @GetMapping("/index")
-    public String indice(Model model){
-
+    public String indice(Model model, HttpSession session){
         model.addAttribute("contador", contador2);
         return "cliente/index";
     }
@@ -92,7 +91,8 @@ public class ClientController {
 
     //Detalle por planta
     @GetMapping("/shopdetails")
-    public String detallestienda(Model model,@RequestParam("id") String id){
+    public String detallestienda(Model model,@RequestParam("id") String id, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         if(opt.isPresent()) {
             List<Plantas> planta1=plantasRepository.findplants(Integer.parseInt(id));
@@ -213,7 +213,8 @@ public class ClientController {
 
     //añadir carrito2
     @GetMapping("/add")
-    public String add2(Model model,@RequestParam("id") String id){
+    public String add2(Model model,@RequestParam("id") String id, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         numplantas=0;
         int find=0;
@@ -281,12 +282,13 @@ public class ClientController {
 
 
     @GetMapping(value="/delete")
-    public String del(Model model,@RequestParam("id") String id){
+    public String del(Model model,@RequestParam("id") String id, HttpSession session){
         //System.out.println(listacompra.size());
         /*
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
         }*/
+        Usuario usuario=(Usuario) session.getAttribute("user");
 
         if(listadetallecompra.size()==1){
             listadetallecompra.remove(0);
@@ -360,12 +362,46 @@ public class ClientController {
         return "cliente/perfil";
     }
 
+    @GetMapping("/detallesCompra")
+    public String detallesCompra(@ModelAttribute("detallecompra") Detallecompra detallecompra,
+                                 @RequestParam ("id") int id,
+                                 Model model){
+        model.addAttribute("compraList",detallecompraRepository.findByComprasID(id));
+        return "cliente/detalles-compra";
+    }
+
+    @GetMapping("/editarPerfil")
+    public String editarPerfil(Model model, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("user");
+
+        model.addAttribute("usuario", usuario);
+
+        return "cliente/editar-perfil";
+    }
+    @PostMapping("/cambiarcontrasena")
+    public String cambiarcontrasena(@RequestParam("password1") String password1,
+                                    @RequestParam("password2") String password2,
+                                    @RequestParam("password3") String password3,
+                                    HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("user");
+
+        if (password2.equals(password1)){
+            usuarioRepository.cambiarcontrasena(usuario.getIdusuario(),password3);
+            System.out.println("Se cambió la contraseña");
+        }else{
+            System.out.println("Las contraseñas no son iguales");
+        }
+
+        return "redirect:/editarPerfil";
+    }
 
 
     @GetMapping("/guardar_compra")
-    public String guardarcompra(){
-        Optional<Usuario> optionalUsuario=usuarioRepository.findById(2);
-        Usuario usuario=optionalUsuario.get();
+    public String guardarcompra(HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
+        //Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
+        //Usuario usuario=optionalUsuario.get();
         //1 creo compra
         Compra compra=new Compra();
         List<Compra> opt= compraRepository.findAll();

@@ -39,28 +39,31 @@
 <!-- ##### Breadcrumb Area End ##### -->
 
 <!-- ##### Contact Area Info Start ##### -->
+
+<!-- Contact Area Info -->
 <div class="contact-area-info section-padding-0-100">
   <div class="container">
     <div class="row align-items-center justify-content-between">
-      <!-- Contact Thumbnail -->
-      <div class="col-12 col-md-6">
-        <div class="contact--thumbnail">
-          <img src="img/bg-img/descarga.png" alt="">
+      <div class="col-12 col-md-5">
+        <div class="profile-info">
+          <h3>Nombre:</h3>
+          <p th:text="${session.user.nombre + ' ' + session.user.apellidos}"></p>
+        </div>
+        <div class="profile-info">
+          <h3>Correo:</h3>
+          <p th:text="${session.user.correo}"></p>
+        </div>
+        <div class="edit-profile">
+          <a th:href="@{'/cliente/editarPerfil'}" class="btn alazea-btn">Editar perfil</a>
         </div>
       </div>
 
-      <div class="col-12 col-md-5">
-        <h3>Nombre: <span th:text="${session.user.nombre + ' '+session.user.apellidos}"></span></h3>
-        <!--p>Número telefónico: <span th:text="${usuario.password}"></span></p-->
-        <h3>Correo: <span th:text="${session.user.correo}"></span></h3>
-        <button class="btn alazea-btn" onclick="editarPerfil()">Editar</button>
-      </div>
-    </div>
     </div>
   </div>
-<!-- ##### Contact Area Info End ##### -->
+</div>
+<!-- End Contact Area Info -->
 
-<!-- ##### Compras realizadas ##### -->
+<!-- Compras realizadas -->
 <div class="compras-section">
   <div class="container">
     <h3>Compras realizadas</h3>
@@ -72,27 +75,23 @@
           <th>Cantidad de plantas</th>
           <th>Estado</th>
           <th>Monto</th>
+          <th></th>
         </tr>
         </thead>
-
-        <!-- Iterar sobre las compras y detalles de compras -->
-
-        <th:block th:each="detalleCompra: ${compras}">
-          <tr>
-            <td th:text="${detalleCompra.idcompra}"></td>
-            <td th:text="${detalleCompra.numplantas}"></td>
-            <td th:text="${detalleCompra.estado}"></td>
-            <td th:text="${'S/. '+detalleCompra.monto}"></td>
-          </tr>
-        </th:block>
-
+        <tbody>
+        <!-- Iterating over the compras and detalleCompras -->
+        <tr th:each="detalleCompra: ${compras}">
+          <td th:text="${detalleCompra.idcompra}"></td>
+          <td th:text="${detalleCompra.numplantas}"></td>
+          <td th:text="${detalleCompra.estado}"></td>
+          <td th:text="${'S/. ' + detalleCompra.monto}"></td>
+          <td><a th:href="@{'/cliente/detallesCompra?id='+ ${detalleCompra.idcompra}}" class="btn btn-light">Ver detalles</a></td>
+        </tr>
+        </tbody>
       </table>
     </div>
   </div>
 </div>
-<br>
-<br>
-
 
 <!-- ##### ACA DAME LA TABLA ##### -->
 
