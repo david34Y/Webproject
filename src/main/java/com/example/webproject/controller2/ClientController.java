@@ -4,6 +4,7 @@ package com.example.webproject.controller2;
 import com.example.webproject.dao.ProductDao;
 import com.example.webproject.entity.*;
 import com.example.webproject.repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -59,21 +60,25 @@ public class ClientController {
 
 
     @GetMapping("/index")
-    public String indice(Model model){
-
+    public String indice(Model model, HttpSession session){
+        //sesion
+        Usuario usuario=(Usuario) session.getAttribute("user");
         model.addAttribute("contador", contador2);
         return "cliente/index";
     }
 
     @GetMapping("/about")
-    public String acercade(Model model){
+    public String acercade(Model model, HttpSession session){
+        //sesion
+        Usuario usuario=(Usuario) session.getAttribute("user");
         model.addAttribute("contador", contador2);
         return "cliente/about";
     }
 
     @GetMapping(value="/shop")
-    public String inicio(Model model){
-
+    public String inicio(Model model, HttpSession session){
+        //sesion
+        Usuario usuario=(Usuario) session.getAttribute("user");
         model.addAttribute("productList", plantasRepository.plantas());
 
         model.addAttribute("contador", contador2);
@@ -87,7 +92,8 @@ public class ClientController {
 
     //Detalle por planta
     @GetMapping("/shopdetails")
-    public String detallestienda(Model model,@RequestParam("id") String id){
+    public String detallestienda(Model model,@RequestParam("id") String id, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         if(opt.isPresent()) {
             List<Plantas> planta1=plantasRepository.findplants(Integer.parseInt(id));
@@ -102,7 +108,8 @@ public class ClientController {
 
     //---------------------PUBLICACIONES-----------------------------------
     @GetMapping("/publicaciones")
-    public String blog(Model model){
+    public String blog(Model model, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         model.addAttribute("contador", contador2);
         List<Publicacion> publicaciones=publicacionRepository.publicaciones();
         for(Publicacion publicacion:publicaciones){
@@ -153,7 +160,8 @@ public class ClientController {
 
 
     @GetMapping("/single_post")
-    public String postunico(Model model, @RequestParam("id") String id){
+    public String postunico(Model model, @RequestParam("id") String id, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         System.out.println(id);
         model.addAttribute("contador", contador2);
         Optional<Publicacion> opt= publicacionRepository.findById(Integer.parseInt(id));
@@ -174,7 +182,8 @@ public class ClientController {
     //--------------------CONTACTO------------------------
 
     @GetMapping("/contact")
-    public String contacto(@ModelAttribute("consultante") Consulta consultante, Model model){
+    public String contacto(@ModelAttribute("consultante") Consulta consultante, Model model, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         model.addAttribute("contador", contador2);
         return "cliente/contact";
     }
@@ -184,7 +193,8 @@ public class ClientController {
 
 
     @GetMapping(value="/carrito")
-    public String carrito(Model model){
+    public String carrito(Model model, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         totalPagar=0.0;
         for(int i=0;i<listadetallecompra.size();i++){
             totalPagar=totalPagar+ listadetallecompra.get(i).getPreciocompra();
@@ -205,7 +215,8 @@ public class ClientController {
 
     //añadir carrito2
     @GetMapping("/add")
-    public String add2(Model model,@RequestParam("id") String id){
+    public String add2(Model model,@RequestParam("id") String id, HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
         Optional<Plantas> opt= plantasRepository.findById(Integer.parseInt(id));
         numplantas=0;
         int find=0;
@@ -272,12 +283,13 @@ public class ClientController {
 
 
     @GetMapping(value="/delete")
-    public String del(Model model,@RequestParam("id") String id){
+    public String del(Model model,@RequestParam("id") String id, HttpSession session){
         //System.out.println(listacompra.size());
         /*
         for(Compra compra1:listacompra){
             System.out.println(compra1.getPlantas().getNombre());
         }*/
+        Usuario usuario=(Usuario) session.getAttribute("user");
 
         if(listadetallecompra.size()==1){
             listadetallecompra.remove(0);
@@ -340,7 +352,8 @@ public class ClientController {
         }
     }
     @GetMapping("/perfil")
-    public String perfil_cliente(Model model, Principal principal) {
+    public String perfil_cliente(Model model, Principal principal, HttpSession session) {
+        Usuario usuario=(Usuario) session.getAttribute("user");
         /*
         String usuarioCorreo = principal.getName(); // Obtiene el correo del usuario logueado
         Usuario usuario = usuarioRepository.findUsuarioByCorreo(usuarioCorreo);
@@ -361,9 +374,10 @@ public class ClientController {
     }
 
     @GetMapping("/guardar_compra")
-    public String guardarcompra(){
-        Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
-        Usuario usuario=optionalUsuario.get();
+    public String guardarcompra(HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("user");
+        //Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
+        //Usuario usuario=optionalUsuario.get();
         //1 creo compra
         Compra compra=new Compra();
         List<Compra> opt= compraRepository.findAll();
