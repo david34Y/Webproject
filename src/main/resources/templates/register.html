@@ -43,7 +43,7 @@
           <p>Complete el siguiente formulario para registrarse en el sistema y pueda realizar pedidos.</p>
         </div>
 
-        <form method="post" class="user" th:action="@{/guardarusuario}"
+        <form method="post" class="user" th:action="@{'/user/guardarusuario'}"
               th:object="${usuario}">
           <div class="form-group row">
             <div class="col-md-6 mb-4">

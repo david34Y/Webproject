@@ -379,7 +379,7 @@ public class UserController {
             /////-----------------------------------------  ------/////
 
             model.addAttribute("contador",contador);
-            return "redirect:/shop";
+            return "redirect:/user/shop";
 
         }
     }
