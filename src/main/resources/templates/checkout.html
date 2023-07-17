@@ -63,8 +63,8 @@
 
                                 <td class="price"><span th:text="|S/. ${product.plantas.getPrecio()}|"></span></td>
                                 <td class="total_price" th:text="|S/.${product.getPreciocompra()}|"><span></span></td>
-                                <td class="action"><a th:href="@{'/delete?id=' + ${product.getIddetallecompra()}}" >
-                                    <i class="icon_close"></i></a></td>
+                                <td class="action"><a th:href="@{'delete?id=' + ${product.getIddetallecompra()}}" >
+                                    <i class="fa fa-close"></i></a></td>
                             </tr>
                             </tbody>
                         </table>

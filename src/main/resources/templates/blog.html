@@ -45,13 +45,13 @@
                             <div class="single-blog-post mb-50">
                                 <div class="post-thumbnail mb-30">
 
-                                    <a th:href="@{'/single_post?id=' + ${publis.idpublicacion}}">
+                                    <a th:href="@{'single_post?id=' + ${publis.idpublicacion}}">
                                         <img th:src="@{|imagen2/${publis.idpublicacion}|}"
                                              class="img-fluid" style="height: 300px;" >
                                     </a>
                                 </div>
                                 <div class="post-content">
-                                    <a th:href="@{'/single_post?id=' + ${publis.idpublicacion}}" class="post-title">
+                                    <a th:href="@{'single_post?id=' + ${publis.idpublicacion}}" class="post-title">
                                         <h5 th:text="${publis.titulo}"></h5>
                                     </a>
                                     <!--
