@@ -45,4 +45,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
             "VALUES (?1, ?2, ?3, ?4, ?5)", nativeQuery = true)
     void registerUsuario(String nombre, String apellido, String email, String password, Integer idrol);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE usuario SET password = ?2 WHERE idusuario = ?1", nativeQuery = true)
+    void cambiarcontrasena(Integer idusuario, String password);
+
 }

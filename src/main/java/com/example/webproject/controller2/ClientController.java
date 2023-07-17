@@ -363,6 +363,41 @@ public class ClientController {
         return "cliente/perfil";
     }
 
+    @GetMapping("/detallesCompra")
+    public String detallesCompra(@ModelAttribute("detallecompra") Detallecompra detallecompra,
+                                 @RequestParam ("id") int id,
+                                 Model model){
+        model.addAttribute("compraList",detallecompraRepository.findByComprasID(id));
+        return "cliente/detalles-compra";
+    }
+
+    @GetMapping("/editarPerfil")
+    public String editarPerfil(Model model, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("user");
+
+        model.addAttribute("usuario", usuario);
+
+        return "cliente/editar-perfil";
+    }
+    @PostMapping("/cambiarcontrasena")
+    public String cambiarcontrasena(@RequestParam("password1") String password1,
+                                    @RequestParam("password2") String password2,
+                                    @RequestParam("password3") String password3,
+                                    HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("user");
+
+        if (password2.equals(password1)){
+            usuarioRepository.cambiarcontrasena(usuario.getIdusuario(),password3);
+            System.out.println("Se cambió la contraseña");
+        }else{
+            System.out.println("Las contraseñas no son iguales");
+        }
+
+        return "redirect:/editarPerfil";
+    }
+
+
     @GetMapping("/guardar_compra")
     public String guardarcompra(HttpSession session){
         Usuario usuario=(Usuario) session.getAttribute("user");
