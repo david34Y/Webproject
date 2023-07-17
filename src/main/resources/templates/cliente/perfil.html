@@ -50,9 +50,9 @@
       </div>
 
       <div class="col-12 col-md-5">
-        <h3>Nombre: <span th:text="${session.user.nombre}"></span></h3>
-        <p>Número telefónico: <span th:text="${usuario.password}"></span></p>
-        <p>Correo: <span th:text="${session.user.correo}"></span></p>
+        <h3>Nombre: <span th:text="${session.user.nombre + ' '+session.user.apellidos}"></span></h3>
+        <!--p>Número telefónico: <span th:text="${usuario.password}"></span></p-->
+        <h3>Correo: <span th:text="${session.user.correo}"></span></h3>
         <button class="btn alazea-btn" onclick="editarPerfil()">Editar</button>
       </div>
     </div>
@@ -68,27 +68,30 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Item</th>
-          <th>Descripción</th>
-          <th>Cantidad</th>
-          <th>Precio Total</th>
+          <th>ID Compra</th>
+          <th>Cantidad de plantas</th>
+          <th>Estado</th>
+          <th>Monto</th>
         </tr>
         </thead>
-        <tbody>
+
         <!-- Iterar sobre las compras y detalles de compras -->
-        <th:block th:each="detalleCompra : ${detallesCompras}">
+
+        <th:block th:each="detalleCompra: ${compras}">
           <tr>
-            <td th:text="${detalleCompra.iddetallecompra}"></td>
-            <td th:text="${detalleCompra.planta.nombre}"></td>
-            <td th:text="${detalleCompra.cantidad}"></td>
-            <td th:text="${detalleCompra.preciocompra}"></td>
+            <td th:text="${detalleCompra.idcompra}"></td>
+            <td th:text="${detalleCompra.numplantas}"></td>
+            <td th:text="${detalleCompra.estado}"></td>
+            <td th:text="${'S/. '+detalleCompra.monto}"></td>
           </tr>
         </th:block>
-        </tbody>
+
       </table>
     </div>
   </div>
 </div>
+<br>
+<br>
 
 
 <!-- ##### ACA DAME LA TABLA ##### -->
