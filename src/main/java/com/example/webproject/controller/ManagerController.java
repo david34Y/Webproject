@@ -192,6 +192,29 @@ public class ManagerController {
         }
     }
 
+    @GetMapping("/yape/{id}")
+    public ResponseEntity<byte[]> mostrarYape(@PathVariable("id") int id){
+        Optional<Compra> opt = compraRepository.findById(id);
+        if(opt.isPresent()){
+            Compra p = opt.get();
+
+            byte[] imagenComoBytes = p.getImagen();
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(
+                    MediaType.parseMediaType(p.getImagencontenttype())
+            );
+
+            return new ResponseEntity<>(
+                    imagenComoBytes,
+                    httpHeaders,
+                    HttpStatus.OK
+            );
+        }else{
+            return null;
+        }
+    }
+
     @GetMapping("/image1/{id}")
     public ResponseEntity<byte[]> mostrarImagen2(@PathVariable ("id") int id){
         Optional<Plantas> opt= plantasRepository.findById(id);
@@ -306,6 +329,8 @@ public class ManagerController {
 
         return "manager/clientes";
     }
+
+
 
 
 }
