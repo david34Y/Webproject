@@ -22,12 +22,12 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 bg-white">
                   <li class="breadcrumb-item">
-                    <form method="post" th:action="@{'/manager/searchProduct'}" >
                       <div class="input-group">
-                        <input id="searchField" name="searchField" class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button id="searchButton" class="btn btn-violet" type="submit">Buscar</button>
+                        <form method="post" th:action="@{/manager/searchProduct}">
+                          <input name="searchField" class="form-control mb-3" type="text" placeholder="Buscar por Titulo" aria-label="Search" th:value="${searchField}">
+                        </form>
                       </div>
-                    </form>
+
                   </li>
                 </ol>
               </nav>
