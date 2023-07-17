@@ -359,6 +359,8 @@ public class ClientController {
 
         model.addAttribute("compras", compras);
 
+        model.addAttribute("contador", contador2);
+
         return "cliente/perfil";
     }
 
@@ -397,8 +399,9 @@ public class ClientController {
     }
 
 
-    @GetMapping("/guardar_compra")
-    public String guardarcompra(HttpSession session){
+    @PostMapping("/guardar_compra")
+    public String guardarCompra(@RequestParam("comprobante") MultipartFile comprobante,
+                                HttpSession session) throws IOException {
         Usuario usuario=(Usuario) session.getAttribute("user");
         //Optional<Usuario> optionalUsuario=usuarioRepository.findById(4);
         //Usuario usuario=optionalUsuario.get();
@@ -419,6 +422,17 @@ public class ClientController {
         }
         compra.setNumplantas(totalplantas);
         compra.setMonto(monto);
+
+
+        if (!comprobante.isEmpty()) {
+            System.out.println("AASEEEEEEEEEEEEEEEEEEEEEEA");
+            compra.setImagen(comprobante.getBytes());
+            compra.setImagennombre(comprobante.getOriginalFilename());
+            compra.setImagencontenttype(comprobante.getContentType());
+        }
+
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
         compraRepository.save(compra);
         int iddetalle=0;
         //añadir detalle de compra
@@ -433,52 +447,9 @@ public class ClientController {
         listadetallecompra.clear();
         listacompra.clear();
         contador2=0;
-        return "redirect:/cliente/yape";
+        return "redirect:/cliente/index";
     }
 
-/*
-    @PostMapping(value = "/yape")
-    public String yape(@RequestParam("archivo") MultipartFile file,
-                                  RedirectAttributes attr,
-                                  BindingResult bindingResult,
-                                  Model model){
-        if (bindingResult.hasErrors()){
-            return "cliente/yape";
-        }else{
-
-            if(file.isEmpty()){
-                model.addAttribute("msg","Debe subir un archivo");
-                return "manager/productosnewFrm";
-            }
 
 
-            if(file.getOriginalFilename().contains("..")){
-                model.addAttribute("msg","No se permiten '..' en el archivo" );
-                return "manager/productosnewFrm";
-            }
-
-            try {
-                if (!file.isEmpty()) {
-                    .setImagen(file.getBytes());
-                    plantas.setImagennombre(file.getOriginalFilename());
-                    plantas.setImagencontenttype(file.getContentType());
-                }
-
-
-                if (plantas.getIdplantas() == null) {
-                    attr.addFlashAttribute("msg", "Producto creado exitosamente");
-                }else{
-                    attr.addFlashAttribute("msg1", "Producto actualizado exitosamente");
-                }
-                plantasRepository.save(plantas);
-                return "redirect:/manager/list";
-            }catch (IOException e){
-                e.printStackTrace();
-                model.addAttribute("msg","ocurrió un error al subir el archivo");
-                return "manager/productosnewFrm";
-            }
-
-        }
-
-    }*/
 }

@@ -78,6 +78,34 @@ public class Compra {
         this.usuario = usuario;
     }
 
+    private byte[] imagen;
+    private String imagennombre;
+    private String imagencontenttype;
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagennombre() {
+        return imagennombre;
+    }
+
+    public void setImagennombre(String imagennombre) {
+        this.imagennombre = imagennombre;
+    }
+
+    public String getImagencontenttype() {
+        return imagencontenttype;
+    }
+
+    public void setImagencontenttype(String imagencontenttype) {
+        this.imagencontenttype = imagencontenttype;
+    }
+
 
 
 

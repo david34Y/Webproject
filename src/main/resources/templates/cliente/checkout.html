@@ -78,19 +78,16 @@
                             <h5>Precio Total</h5>
                             <h5  th:text="|S/. ${total}|"></h5>
                         </div>
-
-                        <!--
+                        <div class="card__content">
+                            <h1>Subir archivo de comprobante</h1>
+                            <input type="file" id="comprobanteInput" class="upload-input" accept="image/*">
+                        </div>
                         <div class="checkout-btn mt-30">
-                            <a href="#" class="btn alazea-btn w-100"
-                               data-toggle="modal" data-target="#exampleModal" >Procesar Compra</a>
-                        </div> -->
-
-                        <div class="checkout-btn mt-30">
-                            <a th:href="@{'guardar_compra'}"
-
-                               class="btn alazea-btn w-100">Procesar Compra</a>
+                            <!-- Cambiar el enlace <a> a un botón de tipo 'button' -->
+                            <button type="button" id="procesarCompraBtn" class="btn alazea-btn w-100">Procesar Compra</button>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -124,8 +121,31 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('procesarCompraBtn').addEventListener('click', function() {
+            // Obtener el archivo seleccionado
+            const inputFile = document.getElementById('comprobanteInput').files[0];
 
-    <!-- ##### Footer Area Start ##### -->
+            // Crear un objeto FormData para enviar el archivo
+            const formData = new FormData();
+            formData.append('comprobante', inputFile);
+
+            // Enviar el archivo al servidor usando AJAX
+            fetch('/cliente/guardar_compra', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                // Manejar la respuesta del servidor si es necesario
+                // Por ejemplo, redirigir a una nueva página o mostrar un mensaje de éxito
+                window.location.href = "/cliente/index";
+            }).catch(error => {
+                // Manejar errores si es necesario
+                console.error('Error al enviar el archivo:', error);
+            });
+        });
+    </script>
+
+        <!-- ##### Footer Area Start ##### -->
     <footer th:replace="fragments/fragment_general2 :: footer"></footer>
     <!-- ##### Footer Area End ##### -->
 
